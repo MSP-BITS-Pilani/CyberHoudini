@@ -4,7 +4,7 @@ let User = new Schema({
     name: {
         type: String
     },
-    desc: {
+    googleID: {
         type: String
     },
 });
