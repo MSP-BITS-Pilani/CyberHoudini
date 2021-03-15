@@ -1,8 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Main from './containers/mainComponent';
+import Main from './Containers/mainComponent';
 
 function App() {
   return (
