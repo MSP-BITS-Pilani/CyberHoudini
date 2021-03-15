@@ -22,3 +22,13 @@ The colours in final deployed version would not be the same. Once core functioni
   >yarn start
   
   open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Project Structure
+
+-All react components and their corresponding CSS files are stored together in a folder following camelCase naming scheme. ("nameComponent.js"). All components are stored in a hierarchy inside Containers folder.
+
+-Store folder contains the redux store files, both reducers and actions. For each specific action, maintain preferably seperate reducers and action files. All reducers get combined in the index.js file using combineReducers()
+
+-In every file keep indentation set as 2 spaces.
+
+-For any situation demanding conditional CSS, use styled-components and classnames packages already installed liberally.
