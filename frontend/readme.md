@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# APOGEE-21 MLSA CTF frontend
 
 This folder contains the code of frontend for Cyber-houdini event conducted by MLSA in APOGEE 2021.
 Project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and is entirely based on
