@@ -5,9 +5,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Collapse
 } from "shards-react";
+import { NavLink } from 'react-router-dom';
+import {authUrl} from '../../url';
+
 
 class Header extends Component {
   constructor(props) {
@@ -34,23 +36,30 @@ class Header extends Component {
   render() {
     return (
       <Navbar type="dark" theme="dark" expand="md">
-        <NavbarBrand href="#">Cyber Houdini</NavbarBrand>
+        <NavbarBrand href="#">
+          <NavLink to = "/">Cyber Houdini</NavLink>
+        </NavbarBrand>
         <NavbarToggler onClick={this.toggleNavbar} />
-
         <Collapse open={this.state.collapseOpen} navbar>
           <Nav navbar className = "ml-auto">
+            { document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
+              <NavItem>
+                <a className = "mx-2" href = {authUrl}>
+                  Login
+                </a>
+              </NavItem>
+              :
+              <NavItem>
+                Logout
+              </NavItem>
+            }
             <NavItem>
-              <NavLink href="#">
-                Login
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#" >
+              <NavLink className = "mx-2" to="/leaderboard" >
                 Leaderboard
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" >
+              <NavLink className = "mx-2" to="/register" >
                 Register
               </NavLink>
             </NavItem>
