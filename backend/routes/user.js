@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 const userRouter = express.Router();
 const Team = require("../models/team")
 const auth = require("../middleware/auth")
@@ -17,6 +17,7 @@ userRouter.get("/", auth, async (req, res) => {
 }
 
 )
+
 
 
 
