@@ -56,6 +56,7 @@ router.get('/google/callback', async (req, res) => {
 
 router.post('/auth/logout', auth, async (req, res) => {
     try {
+        console.log(req.user);
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token;
         });

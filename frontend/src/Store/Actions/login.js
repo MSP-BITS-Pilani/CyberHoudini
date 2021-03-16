@@ -18,8 +18,9 @@ export const logout = () => {
     return (dispatch) => {
         const cookies = document.cookie.split('; ');
         const value = cookies.find(item => item.startsWith('jwt')).split('=')[1];
+        console.log(value);
         axios({
-            url: baseUrl + '/logout',
+            url: baseUrl + '/auth/logout',
             method: 'post',
             headers: {
             Authorization: `Bearer ${value}`
@@ -31,10 +32,12 @@ export const logout = () => {
                 dispatch({ type: actionTypes.LOGOUT });
             } else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                console.log(response);
                 error.response = response;
                 throw error;
             }
         }).catch(error => {
+            console.log(error);
             alert("Could not logout.\nError: "+ error.message);
         });
     };
