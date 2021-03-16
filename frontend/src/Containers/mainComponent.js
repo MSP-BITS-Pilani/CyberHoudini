@@ -4,12 +4,25 @@ import Home from "./home/homeComponent";
 import Header from "./header/headerComponent";
 import Register from "./register/registerComponent";
 import Leaderboard from "./leaderboard/leaderboardComponent";
+import * as loginCreators from '../Store/Actions/login';
+import { connect } from 'react-redux';
 
 class Main extends Component {
+  
+  async componentDidMount() {
+    if(document.cookie.split(';').some((item) => item.trim().startsWith('jwt='))) {
+      this.props.handleLogin();
+    }
+    return null;
+  }
+
   render() {
+    console.log(this.props);
     return(
       <div>
-        <Header />
+        <Header 
+         loggedIn = {this.props.loginHandle}
+         logout = {this.props.handleLogout}/>
         <Switch>
           <Route exact path = "/" component = {Home} />
           <Route path = "/register" component = {Register} />
@@ -22,4 +35,17 @@ class Main extends Component {
   }
 }
 
-export default withRouter(Main);
+const mapDispatchtoProps = dispatch => {
+  return {
+    handleLogin: () => dispatch(loginCreators.login()),
+    handleLogout: () => dispatch(loginCreators.logout())
+  }
+}
+
+const mapStatetoProps = state => {
+  return {
+    loginHandle: state.logStatus.loggedIn
+  }
+}
+
+export default connect( mapStatetoProps, mapDispatchtoProps )(withRouter(Main));

@@ -7,7 +7,7 @@ import {
   NavItem,
   Collapse
 } from "shards-react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import {authUrl} from '../../url';
 
 
@@ -34,6 +34,7 @@ class Header extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Navbar type="dark" theme="dark" expand="md">
         <NavbarBrand href="#">
@@ -44,13 +45,13 @@ class Header extends Component {
           <Nav navbar className = "ml-auto">
             { document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
               <NavItem>
-                <a className = "mx-2" href = {authUrl}>
+                <a className = "mx-2" href = {authUrl + "&state=" + this.props.location.pathname }>
                   Login
                 </a>
               </NavItem>
               :
               <NavItem>
-                Logout
+                <span onClick= {this.props.logout} >Logout</span>
               </NavItem>
             }
             <NavItem>
@@ -70,4 +71,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

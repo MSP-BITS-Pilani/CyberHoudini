@@ -11,7 +11,7 @@ router.get('/google', async (req, res) => {
 
 router.get('/google/callback', async (req, res) => {
     const code = req.query.code;
-
+    console.log(code);
     const { access_token, refresh_token } = await getAccessTokenFromCode(code);
 
     const data = await getUserData(access_token);
@@ -56,6 +56,7 @@ router.get('/google/callback', async (req, res) => {
 
 router.post('/auth/logout', auth, async (req, res) => {
     try {
+        console.log(req.user);
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token;
         });
