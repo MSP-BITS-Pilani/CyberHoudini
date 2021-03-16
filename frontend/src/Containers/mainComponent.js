@@ -6,6 +6,7 @@ import Register from "./register/registerComponent";
 import Leaderboard from "./leaderboard/leaderboardComponent";
 import * as loginCreators from '../Store/Actions/login';
 import { connect } from 'react-redux';
+import Quiz from "./quiz/quizComponent";
 
 class Main extends Component {
   
@@ -30,6 +31,7 @@ class Main extends Component {
           <Route path = "/leaderboard" component = {Leaderboard} />
           <Redirect to = "/" />
         </Switch>
+        <Quiz />
       </div>
     );
   }
