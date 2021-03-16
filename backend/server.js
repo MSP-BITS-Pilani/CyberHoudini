@@ -14,6 +14,7 @@ require("./mongo-connect")
 
 
 const userRouter = require("./routes/user");
+const teamRouter = require('./routes/team');
 const googleLoginRouter = require("./oauth2/googleAuthRouters")
 
 const PORT = 4000;
@@ -30,6 +31,7 @@ app.use(express.json());
 // custom routers
 app.use(googleLoginRouter);
 app.use("/users", userRouter);
+app.use("/teams", teamRouter);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
