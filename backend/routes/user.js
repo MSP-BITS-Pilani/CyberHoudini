@@ -1,25 +1,23 @@
 const express = require("express");
 const userRouter = express.Router();
-const User = require("../models/user");
-const auth = require('../middleware/auth');
+const Team = require("../models/team")
+const auth = require("../middleware/auth")
 
-userRouter.get("/", auth, (req,res)=>{
-    // if(!req.query.email){
-    //     return res.send({
-    //         error:"Please Enter email id"
-    //     })
-    // }
-    // const email=req.query.email
-    // //const email="xxx123@gmail.com"
-    // const user=User.findOne({email: email})
+userRouter.get("/", auth, async (req, res) => {
+    const user = req.user
 
-    const user = req.user;
-    if(!user){
+    if (!user) {
         console.log('Email address not registered')
+        res.sendStatus(404)
     }
-    else
-    res.send(user)
-})
+    else {
+        const team = await Team.findById(user.teamID);
+        res.send({ user, team })
+    }
+}
+
+)
+
 
 
 
