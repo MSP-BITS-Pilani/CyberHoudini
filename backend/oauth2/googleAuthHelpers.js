@@ -33,6 +33,7 @@ const getAccessTokenFromCode = async (code) => {
         oauth2Client.setCredentials(tokens);
         return tokens;
     } catch (e) {
+        console.log(e);
         throw new Error('Unable to fetch access token.');
     }
 };
