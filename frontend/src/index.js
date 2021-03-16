@@ -8,9 +8,10 @@ import "shards-ui/dist/css/shards.min.css";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
+import loginReducer from './Store/Reducers/login';
 
 const rootReducer = combineReducers({
-  
+  logStatus: loginReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
