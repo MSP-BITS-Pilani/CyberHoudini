@@ -1,1 +1,1 @@
-export const authUrl = "http://localhost:4000/google";
+export const authUrl = "http://localhost:4000/google?redirect_uri=http://localhost:3000/";

@@ -6,7 +6,9 @@ import Register from "./register/registerComponent";
 import Leaderboard from "./leaderboard/leaderboardComponent";
 
 class Main extends Component {
+  
   render() {
+    console.log(this.props);
     return(
       <div>
         <Header />
