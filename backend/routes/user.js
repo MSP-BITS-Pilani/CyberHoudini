@@ -20,6 +20,22 @@ userRouter.get("/", (req, res) => {
         }
     })
 })
+userRouter.get("/UserDetails",(req,res)=>{
+    if(!req.query.email){
+        return res.send({
+            error:"Please Enter email id"
+        })
+    }
+    const email=req.query.email
+    //const email="xxx123@gmail.com"
+    const user=User.findOne({email: email})
+    if(!user){
+        console.log('Email address not registered')
+    }
+    else
+    res.send(user)
+})
+
 
 
 module.exports = userRouter
