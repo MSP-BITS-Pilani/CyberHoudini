@@ -10,11 +10,10 @@ teamRouter.get("/", auth, async (req, res) => {
     const teamID = user.teamID;
     const team = await Team.findOne({ _id: teamID });
     if (!team) {
-        console.error('Team does not exist');
-        res.sendStatus(404)
+        res.status(404).send("Team does not exist")
     }
     else {
-        res.send(team);
+        res.status(200).send(team);
     }
 });
 
@@ -43,9 +42,9 @@ teamRouter.post("/", auth, async (req, res) => {
         await team.save()
         user.teamID = team._id
         await user.save()
-        res.sendStatus(200)
+        res.status(201).send("Team created sucessfully");
     } catch (error) {
-        res.send(error)
+        res.status(400).send(error)
     }
 
 });
@@ -54,7 +53,7 @@ teamRouter.post("/register/usingrc", auth, async (req, res) => {
     const user = req.user;
     const reffCode = req.query.reffCode;        // reffCode from frontend
     const team = await Team.findOne({ referralCode: reffCode });    // Find the team with reffCode
-    if(!team) {
+    if (!team) {
         console.error('Invalid referral code');
         res.sendStatus(404);
     }
@@ -73,17 +72,16 @@ teamRouter.post("/register/usingrc", auth, async (req, res) => {
             }
         ]
         )
-        if(no_members[0].count >= 3) {
-            console.error('Team is full');
-            res.sendStatus(404);
+        if (no_members[0].count >= 3) {
+            res.status(400).send("Team is full");
         }
         else {
             try {
                 user.teamID = team._id;
                 await user.save();
-                res.sendStatus(200);
-            } catch(error) {
-                res.send(error);
+                res.status(201).send("User added sucessfully");
+            } catch (error) {
+                res.status(400).send(error);
             }
         }
     }
@@ -93,30 +91,27 @@ teamRouter.post("/remove", auth, async (req, res) => {
     const user = req.user;
     const teamID = user.teamID;
     const team = await Team.findOne({ _id: teamID });
-    if(team.adminID.toString() == user._id.toString()) {
+    if (team.adminID.toString() == user._id.toString()) {
         const member_email = req.query.email;       // email-id of member to be deleted
         const filter = { email: member_email };
-        const update = { teamID : null };
+        const update = { teamID: null };
         // Handle the case when admin wants to leave
-        if(member_email == user.email.toString()) {
-            console.error('Admin cannot remove himself/herself, admin has to remove the team');
-            res.sendStatus(404);
+        if (member_email == user.email.toString()) {
+            res.status(400).send("Admin cannot remove himself/herself, admin has to remove the team");
         }
         else {
             try {
                 await User.findOneAndUpdate(filter, update, {
                     returnOriginal: false
                 });
-                console.log(member_email + ' removed from team');
-                res.sendStatus(200);
-            } catch(error) {
-                res.send(error);
+                res.status(200).send(member_email + " removed from team");
+            } catch (error) {
+                res.status(400).send(error);
             }
         }
     }
     else {
-        console.error('Unauthorized access');
-        res.sendStatus(404);
+        res.status(401).send("Unauthorized access");
     }
 });
 
@@ -124,18 +119,18 @@ teamRouter.delete("/", auth, async (req, res) => {
     const user = req.user;
     const teamID = user.teamID;
     const team = await Team.findOne({ _id: teamID });
-    if(team.adminID.toString() == user._id.toString()) {
+    if (team.adminID.toString() == user._id.toString()) {
         try {
             await User.updateMany(
-                {teamID : teamID},
+                { teamID: teamID },
                 {
-                    $set : {'teamID' : null}
+                    $set: { 'teamID': null }
                 }
             );
-            await Team.deleteOne({_id : teamID});
+            await Team.deleteOne({ _id: teamID });
             console.log('Team removed');
             res.sendStatus(200);
-        } catch(error) {
+        } catch (error) {
             res.send(error);
         }
     }
