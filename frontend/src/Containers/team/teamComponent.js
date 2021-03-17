@@ -17,7 +17,7 @@ class Team extends Component {
     const value = cookies.find(item => item.startsWith('jwt')).split('=')[1];
     try{
         const response = await axios({
-            url: baseUrl + '/team',
+            url: baseUrl + '/teams',
             method: 'get',
             headers: {
                 Authorization: `Bearer ${value}`
@@ -40,14 +40,24 @@ class Team extends Component {
     };
   }
 
-  render(){
+  async componentDidMount() {
     if(this.props.loggedIn && (this.props.userData.team !== null)) {
       this.fetchTeamInfo();
+    }
+  }
+
+  render(){
+    if(this.props.loggedIn && (this.props.userData.team !== null)) {
       return(
-        <div className = "container">
+        <div className = "container mt-3">
           <div className = "row">
             <div className = "col-12">
-              <h2>ddd</h2>
+              <h2>{this.state.teamData.teamName}</h2>
+              { this.state.teamData.adminID === this.props.userData.user._id ?
+                <h4>Referral code: {this.state.teamData.referralcode}</h4>
+                :
+                <h4>Only admin can share the referral code to add other members</h4>
+              }
             </div>
           </div>
         </div>

@@ -61,7 +61,7 @@ class Header extends Component {
             </NavItem>
             <NavItem>
               <NavLink className = "mx-2" to="/register" >
-                Register
+                { this.props.loggedIn && (this.props.userData.team !== null) ? 'Dashboard' : 'Register'}
               </NavLink>
             </NavItem>
           </Nav>
