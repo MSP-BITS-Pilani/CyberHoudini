@@ -13,7 +13,9 @@ teamRouter.get("/", auth, async (req, res) => {
         res.status(404).send("Team does not exist")
     }
     else {
-        res.status(200).send(team);
+        // return details of members
+        const members = await User.find({ teamID: teamID });
+        res.status(200).send({ team, members });
     }
 });
 
