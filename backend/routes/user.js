@@ -1,25 +1,24 @@
-const express = require("express")
+const express = require("express");
 const userRouter = express.Router();
-const User = require("../models/user")
+const Team = require("../models/team")
+const auth = require("../middleware/auth")
 
-userRouter.get("/", (req, res) => {
-    User.find((err, users) => {
-        if (err) {
-            console.error(err);
-        } else {
-            if (users.length == 0) {
-                var testUsers = [
-                    { name: 'cor', desc: 'person who does the thing' },
-                    { name: 'jynnie', desc: 'person who does the thing' },
-                    { name: 'mntan', desc: 'person who does the thing' }
-                ];
+userRouter.get("/", auth, async (req, res) => {
+    const user = req.user
 
-                User.collection.insert(testUsers, (err, users) => { if (err) console.log(err); })
-            }
-            res.send(users)
-        }
-    })
-})
+    if (!user) {
+        console.log('Email address not registered')
+        res.sendStatus(404)
+    }
+    else {
+        const team = await Team.findById(user.teamID);
+        res.send({ user, team })
+    }
+}
+
+)
+
+
 
 
 module.exports = userRouter
