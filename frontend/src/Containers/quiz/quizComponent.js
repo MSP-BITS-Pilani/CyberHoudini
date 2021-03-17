@@ -9,8 +9,7 @@ class Quiz extends Component {
   this.state={
     id: 1, 
     question: null,
-    answer: null,
-    userAnswer: "",
+    userAnswer: ""
   }
 }
 
@@ -19,24 +18,19 @@ class Quiz extends Component {
   }
 
   getQuestion = (id) => {
-    // axios.get(baseUrl + '/question', {
-    //   params: {
-    //     ID: id
-    //   }
-    // }).then( response => {
-    //   this.setState({
-    //     question: response.data.question,
-    //     answer: response.data.answer
-    //   })
-    // }).catch( error => {
-    //   console.log(error);
-    // })
-
-    this.setState({
-      question: "A question",
-      answer: "42"
-    })
-      
+    axios({
+      method: 'get',
+      url: baseUrl + '/question',
+      headers: {
+        questionID: id
+      }
+    }).then( response => {
+      this.setState({
+        question: response.data
+      })
+    }).catch( error => {
+      console.log(error);
+    }) 
   }
 
   handleAnswerChange = (event) => {
@@ -46,13 +40,38 @@ class Quiz extends Component {
   }
 
   handleAnswerSubmit = (event) => {
-    const trimmedUserAnswer = this.state.userAnswer.trim();
-    if(trimmedUserAnswer === this.state.answer){
-      alert("correct!");
-    }
-    else{
-      alert("Sorry, wrong answer!");
-    }
+    const post = {
+      userAnswer: this.state.userAnswer,
+      questionID: this.state.id
+    };
+    axios({
+      url: baseUrl + '/submitAnswer',
+      method: 'post',
+      data: post
+    }).then(response => {
+       if(response.data === false){
+         alert("Wrong answer, try again");
+       }else{
+        this.setState((prevState, props) => {
+          const updatedState = {
+            id: prevState.id + 1,
+            userAnswer: "",
+            question: "Loading..."  
+          };
+
+          return updatedState;
+          
+        }, () => {
+          if(this.state.id === 5){
+            alert("Congratulations, you won!");
+            // Update DOM to show mario image here
+          }else{
+            this.getQuestion(this.state.id);
+          }
+        });
+      }
+    })
+
     event.preventDefault();
   }
 
