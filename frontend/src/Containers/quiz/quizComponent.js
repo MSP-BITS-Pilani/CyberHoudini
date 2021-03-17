@@ -62,7 +62,7 @@ class Quiz extends Component {
           return updatedState;
           
         }, () => {
-          if(this.state.id === 5){
+          if(this.state.id === 11){         // If 10 stages. Update accordingly if stages are different
             alert("Congratulations, you won!");
             // Update DOM to show mario image here
           }else{
