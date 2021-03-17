@@ -11,11 +11,7 @@ teamRouter.get("/", auth, async (req, res) => {
     const team = await Team.findOne({ _id: teamID });
     if (!team) {
         console.error('Team does not exist');
-<<<<<<< HEAD
-        res.send(404)
-=======
         res.sendStatus(404)
->>>>>>> team-api-register
     }
     else {
         res.send(team);
@@ -52,9 +48,6 @@ teamRouter.post("/", auth, async (req, res) => {
         res.send(error)
     }
 
-<<<<<<< HEAD
-})
-=======
 });
 
 teamRouter.get("/register", auth, async (req, res) => {
@@ -100,6 +93,5 @@ teamRouter.post("/register/usingrc", auth, async (req, res) => {
         }
     }
 });
->>>>>>> team-api-register
 
 module.exports = teamRouter
