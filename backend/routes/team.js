@@ -14,7 +14,10 @@ teamRouter.get("/", auth, async (req, res) => {
         res.sendStatus(404)
     }
     else {
-        res.send(team);
+        const members = await User.find({teamID: teamID});
+        console.log(members);
+        console.log({team, members});
+        res.send({team, members});
     }
 });
 
