@@ -11,7 +11,7 @@ teamRouter.get("/", auth, async (req, res) => {
     const team = await Team.findOne({ _id: teamID });
     if (!team) {
         console.error('Team does not exist');
-        res.send(404)
+        res.sendStatus(404)
     }
     else {
         res.send(team);
@@ -48,6 +48,50 @@ teamRouter.post("/", auth, async (req, res) => {
         res.send(error)
     }
 
-})
+});
+
+teamRouter.get("/register", auth, async (req, res) => {
+    // Don't know what to do here
+});
+
+teamRouter.post("/register/usingrc", auth, async (req, res) => {
+    const user = req.user;
+    const reffCode = req.query.reffCode;        // reffCode from frontend
+    console.log(reffCode);
+    const team = await Team.findOne({ referralCode: reffCode });    // Find the team with reffCode
+    if(!team) {
+        console.error('Invalid referral code');
+        res.sendStatus(404);
+    }
+    else {
+        // Check if team is full or not
+        const no_members = await User.aggregate([
+            {
+                $match: {
+                    teamID: {
+                        $eq: team._id
+                    }
+                }
+            },
+            {
+                $count: 'count'
+            }
+        ]
+        )
+        if(no_members[0].count >= 3) {
+            console.error('Team is full');
+            res.sendStatus(404);
+        }
+        else {
+            try {
+                user.teamID = team._id;
+                await user.save();
+                res.sendStatus(200);
+            } catch(error) {
+                res.send(error);
+            }
+        }
+    }
+});
 
 module.exports = teamRouter
