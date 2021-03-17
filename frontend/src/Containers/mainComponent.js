@@ -31,7 +31,6 @@ class Main extends Component {
           <Route path = "/leaderboard" component = {Leaderboard} />
           <Redirect to = "/" />
         </Switch>
-        <Quiz />
       </div>
     );
   }
