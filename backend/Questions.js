@@ -35,14 +35,14 @@ userRouter.get('/question',(req,res)=>{
 
         case 5:res.send({
             question:'\“Her heart must be ash where her body lies burned. What hope lets your hands rake the cold in real time?”\ from the poem Ghazal by Agha Shahid Ali.',
-            image:'',
+            image:'https://i.ibb.co/k2xXWzH/Stage371.png',
             stage:'371'
         })
         break;
 
         case 6:res.send({
             question:'4F 63 60 1B 31 6F 63 1B 68 6A 69 6F 63 1B 6A 61 1B 6F 63 60 1B 74 60 5C 6D',
-            image:'',//image not found
+            image:'https://i.ibb.co/Yb8PKDV/Stage649.jpg',
             stage:'649'
         })
         break;
@@ -63,7 +63,7 @@ userRouter.get('/question',(req,res)=>{
 
         case 9:res.send({
             question:'',
-            image:'',//image to be inserted
+            image:'https://i.ibb.co/WG7DMRq/Stage1349.png',
             stage:'1349',
         })
         break;
@@ -98,7 +98,7 @@ userRouter.get('/question',(req,res)=>{
 
         case 14:res.send({
             question:'',
-            image:'',
+            image:'https://i.ibb.co/QFxT3CJ/Stage14.png',
             stage:'14',
         })
         break;
@@ -190,6 +190,11 @@ userRouter.get('/submitAnswer',(req,res)=>{
                 res.send({response:'false'})
                 break;
         case 13: if(UserAnsFin==='3293')
+                res.send({response: 'true'})
+                else
+                res.send({response:'false'})
+                break;
+        case 14: if(UserAnsFin==='cheese')
                 res.send({response: 'true'})
                 else
                 res.send({response:'false'})
