@@ -128,15 +128,13 @@ teamRouter.delete("/", auth, async (req, res) => {
                 }
             );
             await Team.deleteOne({ _id: teamID });
-            console.log('Team removed');
-            res.sendStatus(200);
+            res.status(200).send("Team removed");
         } catch (error) {
-            res.send(error);
+            res.status(400).send(error);
         }
     }
     else {
-        console.error('Unauthorized access');
-        res.sendStatus(404);
+        res.status(401).send("Unauthorized access");
     }
 });
 
