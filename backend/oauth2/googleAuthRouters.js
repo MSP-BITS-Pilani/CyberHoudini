@@ -23,7 +23,7 @@ router.get('/google/callback', async (req, res) => {
         const user = new User({
             email: data.email,
             name: data.name,
-            picture,
+            picture: picture,
             oauth_tokens: {
                 access_token: access_token,
                 refresh_token: refresh_token
