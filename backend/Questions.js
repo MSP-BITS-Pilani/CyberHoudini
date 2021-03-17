@@ -11,7 +11,7 @@ userRouter.get('/question',(req,res)=>{
             stage:'0'
         })
         break;
-        
+
         case 2:res.send({
             question:'YJR DP;IYOPM YP YJOD [IXX;R OD DOC VJSTSVYRTD SMF YJR MS,R PG YJR ,PDY VP,,PM LRUNPSTD ;SUPIY',
             image:'',
@@ -69,8 +69,8 @@ userRouter.get('/question',(req,res)=>{
         break;
 
         case 10:res.send({
-            question:'',
-            image:'',//image to be inserted
+            question:'ZIOL DTLLQUT OL DQRT OFZTFZOGFQSSN SGFU. OZ LIGVL IGV TFEGROFU DTLLQUTL OF ZIT TFUSOLI SQFUXQUT DTQFL ZIQZ LGDT STZZTKL QKT KTHTQZTR DXEI DGKT GYZTF EGDHQKTR ZG GZITKL. FG, ZIOL OL FGZ Q EKQHHN QZZTDHZ ZG KTDGCT QFN HQKZOEXSQK STZZTK YKGD ZIOL SOLZ, OZ\'L QF QWLGSXZTSN FGKDQS KQFRGD HQKQUKQHI. QF OFZTKTLZOFU ZKOCOQ YGK NGX OL ZIQZ ZIT STZZTKL GY ZIT QSHIQWTZ OF GKRTK EGKKTLHGFR ZG JVTKZN YKGD STYZ ZG KOUIZ, ZGH ZG WGZZGD. LG DXEI YGK ZIT HQKQUKQHI, ZIT QFLVTK NGX\'SS FTTR ZG TFZTK OL "DORRST',
+            image:'',
             stage:'1679'
         })
         break;
@@ -174,7 +174,7 @@ userRouter.get('/submitAnswer',(req,res)=>{
                 else
                 res.send({response:'false'})
                 break;
-        case 10: if(UserAnsFin==='puerto rico')
+        case 10: if(UserAnsFin==='middle')
                 res.send({response: 'true'})
                 else
                 res.send({response:'false'})
