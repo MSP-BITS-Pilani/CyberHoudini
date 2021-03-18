@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import baseUrl from "../../baseUrl";
 import "./quiz.css";
+import './qFifteenBill/qFifteenBill';
+import QFifteenBill from './qFifteenBill/qFifteenBill';
 
 class Quiz extends Component {
   constructor(props){
@@ -9,7 +11,9 @@ class Quiz extends Component {
   this.state={
     id: 1, 
     question: null,
-    userAnswer: ""
+    userAnswer: "",
+    stageNumber: "?",
+    imgURL: null
   }
 }
 
@@ -26,7 +30,9 @@ class Quiz extends Component {
       }
     }).then( response => {
       this.setState({
-        question: response.data
+        question: response.data.question,
+        stageNumber: response.data.stage,
+        imgURL: response.data.image
       })
     }).catch( error => {
       console.log(error);
@@ -62,12 +68,7 @@ class Quiz extends Component {
           return updatedState;
           
         }, () => {
-          if(this.state.id === 11){         // If 10 stages. Update accordingly if stages are different
-            alert("Congratulations, you won!");
-            // Update DOM to show mario image here
-          }else{
             this.getQuestion(this.state.id);
-          }
         });
       }
     })
@@ -79,11 +80,25 @@ class Quiz extends Component {
 
     let additionalClass = "";             // In this question color of background and question is same
     if(this.state.id === 4){
-      additionalClass = "questionFour";      // Add code for question where comment has to be embedded in source
+      additionalClass = "questionFour";      
     }
 
-    return (
+    let additionalDiv = null;
+    if(this.state.id === 8){         // for this question URL has to be embedded in page source
+        additionalDiv = <div style={{display: 'none'}}>https://mars.nasa.gov/mars2020/spacecraft/rover/</div>
+    }
+
+    if(this.state.id === 15){
+        additionalDiv = <QFifteenBill />
+    }
+
+    let toDisplay = (
       <div>
+        <p>Stage number : {this.state.stageNumber}</p>
+        {this.state.imgURL.length > 0 &&
+            <img src={this.state.imgURL} alt="Question info" />
+        }
+        {additionalDiv}
         <p className={additionalClass}>{this.state.question}</p>
         <form onSubmit={this.handleAnswerSubmit}>
           <label>
@@ -93,6 +108,15 @@ class Quiz extends Component {
           <input type="submit" value="Submit" />
         </form>
       </div>
+
+    );
+
+    if(this.stage.id === 18){           /*For a total of 17 stages*/
+       toDisplay = <img src={this.state.imgURL} alt="Princess was in another castle" />
+    }
+
+    return (
+      {toDisplay}
     );
   }
 }
