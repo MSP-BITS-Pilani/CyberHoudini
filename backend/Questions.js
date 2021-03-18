@@ -3,7 +3,7 @@ const userRouter = express.Router();
 
 //Images for questions not inserted yet
 userRouter.get('/question',(req,res)=>{
-    const idno = req.headers
+    const idno = req.headers.questionID
     switch(idno){
         case 1:res.send({
             question:'Predict the next number in the sequence: 27, 1217, 11121117, 31123117, 132112122117, ?',
@@ -119,8 +119,22 @@ userRouter.get('/question',(req,res)=>{
 
         case 17:res.send({
             question:'Decode the information hidden in this chessboard which is the name of something. Where was this something formed? ',
-            image:'',
+            image:'https://i.ibb.co/6wgHvS4/Stage17.png',
             stage:'17'
+        })
+        break; 
+
+        case 17:res.send({
+            question:'Decode the information hidden in this chessboard which is the name of something. Where was this something formed? ',
+            image:'https://i.ibb.co/6wgHvS4/Stage17.png',
+            stage:'17'
+        })
+        break; 
+
+        case 18:res.send({
+            question:'',
+            image:'https://i.ibb.co/92xf4RH/Stage18.jpg',
+            stage:'18'
         })
         break; 
 
@@ -145,6 +159,11 @@ userRouter.get('/submitAnswer',(req,res)=>{
                 res.send({response:'false'})
                 break;
         case 3: if(UserAnsFin==='mirror')
+                res.send({response: 'true'})
+                else
+                res.send({response:'false'})
+                break;
+        case 4: if(UserAnsFin==='next stage')
                 res.send({response: 'true'})
                 else
                 res.send({response:'false'})
