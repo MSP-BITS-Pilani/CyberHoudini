@@ -216,6 +216,45 @@ teamRouter.post("/remove", auth, async (req, res) => {
                 res.send(error);
             }
         }
+
+        // if there are more than one members then this else block is run 
+        else {
+            try {
+                team.adminID = member._id;
+                await team.save();
+                res.status(200).send("Sucessfully left the team")
+
+            } catch (err) {
+                res.status(400).send(err)
+            }
+        }
+    }
+    // run this when the user is not an admin
+    else {
+        res.status(200).send("Sucessfully left the team")
+    }
+})
+
+teamRouter.delete("/", auth, async (req, res) => {
+    const user = req.user;
+    const teamID = user.teamID;
+    const team = await Team.findOne({ _id: teamID });
+    if (team.adminID.toString() == user._id.toString()) {
+        try {
+            await User.updateMany(
+                { teamID: teamID },
+                {
+                    $set: { 'teamID': null }
+                }
+            );
+            await Team.deleteOne({ _id: teamID });
+            res.status(200).send("Team removed");
+        } catch (error) {
+            res.status(400).send(error);
+        }
+    }
+    else {
+        res.status(401).send("Unauthorized access");
     }
     else {
         console.error('Unauthorized access');
