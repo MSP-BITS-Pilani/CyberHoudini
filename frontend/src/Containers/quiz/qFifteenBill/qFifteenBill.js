@@ -20,4 +20,12 @@ function QFifteenBill() {
     );
 }
 
+/*
+Make an image like a bill with date 1/1/1970 on the top left corner.
+Give the bookshop a random name and add some details, step down and add the date 1/1/2021 00:00:00 GMT
+In the bill itself, give 4 items - each with an item number as those epoch times listed below. 
+In the name of the product column, provide 3 dead links and one live link (the one below).
+*/
+
+
 export default QFifteenBill;
