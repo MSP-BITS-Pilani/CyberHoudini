@@ -30,8 +30,7 @@ let userSchema = new Schema({
 
     picture: {
         type: String,
-        required: true,
-        lowercase: true
+        required: true
     },
 
     tokens: [{
