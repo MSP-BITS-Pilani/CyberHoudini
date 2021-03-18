@@ -19,6 +19,7 @@ class Quiz extends Component {
     question: "Loading...",
     userAnswer: "",
     imgURL: "",
+    hint: null,
     fadeIn: false
   }
 }
@@ -44,7 +45,8 @@ class Quiz extends Component {
     }).then( response => {
       this.setState({
         question: response.data.question,
-        imgURL: response.data.image
+        imgURL: response.data.image,
+        hint: response.data.hint
       })
     }).catch( error => {
       console.log(error);
@@ -110,16 +112,24 @@ class Quiz extends Component {
 
         <Container style={{margin: "2rem auto"}}> {/*Question Div */}
           <Card>
-          {this.state.imgURL.length === 0 && 
-            <CardImg top width="100%" src="https://down.imgspng.com/download/0720/kia_PNG44.png" alt="Card image cap" />}
+          {this.state.imgURL.length > 0 && 
+            <CardImg top width="100%" src={this.state.imgURL} alt="Card image cap" />}
           {additionalDiv}
         <CardBody>
           <CardTitle className={additionalClass} tag="h5">Stage number - {this.state.QuestionIDs[this.state.id]}</CardTitle>
           <CardText>{this.state.question}</CardText>
-          <Button color="primary" outline size="sm" onClick={this.toggleHint}>Show Hint</Button>
-          <Fade in={this.state.fadeIn} className="mt-3">
-            This is a hint
-          </Fade>
+          {this.state.hint && 
+            <React.Fragment>
+            <Button color="primary" outline size="sm" onClick={this.toggleHint}>Show Hint</Button>
+          
+            <Fade in={this.state.fadeIn} className="mt-3">
+              {this.state.hint}
+            </Fade>
+            
+          </React.Fragment>}
+          
+          
+          
         </CardBody>
       </Card>
 

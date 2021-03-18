@@ -53,7 +53,7 @@ class Main extends Component {
          logout = {this.props.handleLogout}/>
         
 
-        {/*
+    
         <Switch>
           <Route exact path = "/" component = {Home} />
           <Route path = "/register">
@@ -68,8 +68,8 @@ class Main extends Component {
           <Redirect to = "/404" />
         </Switch>
         
-        */}
-        <Quiz />
+        
+        
       </div>
     );
   }
