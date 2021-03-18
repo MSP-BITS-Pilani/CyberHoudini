@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './register.css';
-import { Button } from 'shards-react';
+import { Button, Card, CardBody, CardHeader } from 'shards-react';
 import { withRouter } from 'react-router-dom';
 import LoginModal from './loginModalComponent';
 import JoinModal from './joinModalComponent';
@@ -66,26 +66,38 @@ class Register extends Component {
         <div>
           <div className = "container">
             <br/>
-            <div className = "row">
-              <div className = "col-6">
-                <h4>Create your own team</h4>
-                <br/>
-                {
-                  document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
-                  <Button onClick = {this.toggleLoginModal} >Create</Button>
-                  :
-                  <Button onClick = {this.toggleCreateModal} >Create</Button>
-                }
+            <div className = "row home-row align-items-center text-center">
+              <div className = "col-12 col-md-6">
+                <Card className = "register-card">
+                  <CardHeader className = "register-header">
+                    <h4 className = "register-title">Create</h4>
+                  </CardHeader>
+                  <CardBody className = "register-body">
+                    <p>Make your own team and take charge. Be the admin and lead your people to glory.</p>
+                    {
+                      document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
+                      <Button className = "home-register" onClick = {this.toggleLoginModal} >Create</Button>
+                      :
+                      <Button className = "home-register" onClick = {this.toggleCreateModal} >Create</Button>
+                    }
+                  </CardBody>
+                </Card>
               </div>
-              <div className = "col-6">
-                <h4>Join an already existing team</h4>
-                <br/>
-                {
-                  document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
-                  <Button onClick = {this.toggleLoginModal} >Join</Button>
-                  :
-                  <Button onClick = {this.toggleJoinModal} >Join</Button>
-                }
+              <div className = "col-12 col-md-6">
+                <Card className = "register-card">
+                  <CardHeader className = "register-header">
+                    <h4 className = "register-title">Join</h4>
+                  </CardHeader>
+                  <CardBody className = "register-body">
+                    <p>Join your friends in their bid to win it all. Ask the admin for team's referral code.</p>
+                    {
+                      document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
+                      <Button className = "home-register" onClick = {this.toggleLoginModal} >Join</Button>
+                      :
+                      <Button className = "home-register" onClick = {this.toggleJoinModal} >Join</Button>
+                    }
+                  </CardBody>
+                </Card>
               </div>
             </div>
           </div>

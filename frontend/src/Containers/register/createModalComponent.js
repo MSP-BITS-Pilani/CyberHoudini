@@ -70,7 +70,7 @@ class CreateModal extends Component {
                 required/>
             </FormGroup>
             <FormGroup>
-              <Button type = "submit" onClick = {this.handleSubmit}>Create team</Button>
+              <Button className = "home-register" type = "submit" onClick = {this.handleSubmit}>Create team</Button>
             </FormGroup>
           </Form>
         </ModalBody>

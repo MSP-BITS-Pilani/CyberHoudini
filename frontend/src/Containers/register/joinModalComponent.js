@@ -70,7 +70,7 @@ class JoinModal extends Component {
                 required/>
             </FormGroup>
             <FormGroup>
-              <Button type = "submit" onClick = {this.handleSubmit}>Join team</Button>
+              <Button className = "home-register" type = "submit" onClick = {this.handleSubmit}>Join team</Button>
             </FormGroup>
           </Form>
         </ModalBody>
