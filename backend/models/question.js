@@ -9,8 +9,7 @@ let questionSchema = new Schema({
     },
 
     question: {
-        type: String,
-        required: [true, "Question is required"]
+        type: String
     },
     image: {
         type: String,
