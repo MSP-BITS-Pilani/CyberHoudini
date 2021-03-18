@@ -76,9 +76,15 @@ class Quiz extends Component {
   }
 
   render(){
+
+    let additionalClass = "";             // In this question color of background and question is same
+    if(this.state.id === 4){
+      additionalClass = "questionFour";      // Add code for question where comment has to be embedded in source
+    }
+
     return (
       <div>
-        <p>{this.state.question}</p>
+        <p className={additionalClass}>{this.state.question}</p>
         <form onSubmit={this.handleAnswerSubmit}>
           <label>
             Enter Answer:
