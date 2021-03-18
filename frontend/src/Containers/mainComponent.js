@@ -51,6 +51,9 @@ class Main extends Component {
         <Header 
          loggedIn = {this.props.loginHandle}
          logout = {this.props.handleLogout}/>
+        
+
+        {/*
         <Switch>
           <Route exact path = "/" component = {Home} />
           <Route path = "/register">
@@ -64,6 +67,9 @@ class Main extends Component {
           <Route path = "/404" component = {NotFound} />
           <Redirect to = "/404" />
         </Switch>
+        
+        */}
+        <Quiz />
       </div>
     );
   }
