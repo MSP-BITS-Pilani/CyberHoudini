@@ -50,7 +50,8 @@ class Main extends Component {
       <div>
         <Header 
          loggedIn = {this.props.loginHandle}
-         logout = {this.props.handleLogout}/>
+         logout = {this.props.handleLogout}
+         userData = {this.props.userData}/>
         <Switch>
           <Route exact path = "/" component = {Home} />
           <Route path = "/register">
