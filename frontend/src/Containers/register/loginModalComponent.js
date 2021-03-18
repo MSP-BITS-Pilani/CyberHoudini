@@ -12,9 +12,11 @@ class LoginModal extends Component {
         </ModalHeader>
         <ModalBody>
           <p>In order to be registered for the tournament, you must login with your gmail account.</p>
-          <Button className="modal-button">
-            <a href = {authUrl + "&state=" + this.props.url } onClick = {this.props.toggleModal}>Login</a>
-          </Button>
+          <a href = {authUrl + "&state=" + this.props.url } onClick = {this.props.toggleModal}>
+            <Button className="home-register">
+              Login
+            </Button>
+          </a>
         </ModalBody>
       </Modal>
     )

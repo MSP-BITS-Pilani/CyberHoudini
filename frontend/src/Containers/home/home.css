@@ -1,0 +1,13 @@
+.home-row {
+  min-height: calc(100vh - 100px) !important;
+}
+
+.home-logo {
+  width: 100% !important;
+}
+
+.home-register {
+  background-color: #203a61 !important;
+  color: white !important;
+  border-color: #203a61 !important;
+}

@@ -1,0 +1,29 @@
+.head-link {
+  color: #203a61 !important;
+  text-decoration: none !important;
+  font-weight: 400 !important;
+  transition: font-size 0.15s ease-in-out !important;
+}
+
+.head-link:hover {
+  color: #5c2d91 !important;
+  font-size: 1.1rem !important;
+}
+
+.head-toggler {
+  color: #5c2d91 !important;
+  background-color: #203a61 !important;
+}
+
+.head-brand {
+  font-size: 1.3rem !important;
+  color: #203a61 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  transition: font-size 0.15s ease-in-out !important;
+}
+
+.head-brand:hover {
+  color: #5c2d91 !important;
+  font-size: 1.4rem !important;
+}

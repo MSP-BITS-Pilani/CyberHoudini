@@ -1,0 +1,12 @@
+.register-header {
+  background-color: #203a61 !important;
+}
+
+.register-title {
+  color: white !important;
+  font-size: 2rem;
+}
+
+.register-body {
+  height: 175px !important;
+}
