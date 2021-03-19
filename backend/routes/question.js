@@ -31,6 +31,9 @@ var returnRouter = function (io) {
         io.sockets.join(teamID.toString());
 
         if (!question) {
+            if (level >= 15) {
+                res.status(200).send({ level: 15 })
+            }
             console.error('No such stage');
             res.sendStatus(404);
         }
