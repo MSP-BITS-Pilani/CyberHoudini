@@ -65,10 +65,7 @@ class Main extends Component {
           <Route path="/404" component={NotFound} />
           <Route path="/houdini" component={Quiz} />
           <Redirect to="/404" />
-        </Switch>
-
-
-
+        </Switch> 
       </div>
     );
   }
