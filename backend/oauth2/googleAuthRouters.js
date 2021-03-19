@@ -6,10 +6,10 @@ const User = require('../models/user');
 const auth = require('../middleware/auth');
 
 router.get('/google', async (req, res) => {
-    await res.redirect(googleLoginUrl);
+	await res.redirect(googleLoginUrl);
 });
 
-router.get('/google/callback', async (req, res) => {
+router.get('/google/callback', async (req, res) => {	
     const code = req.query.code;
     console.log(code);
     const { access_token, refresh_token } = await getAccessTokenFromCode(code);
