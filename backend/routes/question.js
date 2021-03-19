@@ -52,7 +52,7 @@ var returnRouter = function (io) {
         if (response.toString() === answers.answers[level]) {
             // io.on("connection", async (socket) => {
             //     console.log('Connection established!')
-            const topTeams = await Team.find({}).sort("-score").limit(10);
+            const topTeams = await Team.find({}).sort([["score", -1], ["lastCorrectAnswer", 1]]).limit(10);
             //     socket.emit("updateLeaderBoard", topTeams)
             // })
 
@@ -74,6 +74,14 @@ var returnRouter = function (io) {
         }
     });
 
+    questionRouter.get("/leaderboard", async (req, res) => {
+        try {
+            const topTeams = await Team.find({}).sort([["score", -1], ["lastCorrectAnswer", 1]]).limit(10);
+            res.send(topTeams);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    })
     return questionRouter;
 }
 
