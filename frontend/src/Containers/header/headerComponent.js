@@ -51,7 +51,7 @@ class Header extends Component {
               </NavItem>
               :
               <NavItem>
-                <span onClick= {this.props.logout} >Logout</span>
+                <span className = "mx-2" onClick= {this.props.logout} >Logout</span>
               </NavItem>
             }
             <NavItem>

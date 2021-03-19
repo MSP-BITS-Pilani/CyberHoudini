@@ -2,15 +2,18 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import baseUrl from '../../baseUrl';
 
-const logThemIn = () => {
+const logThemIn = (user) => {
+    console.log(user);
     return {
-        type: actionTypes.LOGIN
+        type: actionTypes.LOGIN,
+        payload: user
     };
 }
 
-export const login = () => {
+export const login = (user) => {
+    console.log(user);
     return (dispatch) => {
-        dispatch(logThemIn());
+        dispatch(logThemIn(user));
     }
 }
 
