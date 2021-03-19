@@ -3,13 +3,13 @@ const questions = [
         stage: '0',
         question: 'Predict the next number in the sequence: 27, 1217, 11121117, 31123117, 132112122117, ?',
         image: null,
-        hint: null
+        hint: 'Say the sequence out loud'
     },
     {
         stage: '82',
         question: 'YJR DP;IYOPM YP YJOD [IXX;R OD DOC VJSTSVYRTD SMF YJR MS,R PG YJR ,PDY VP,,PM LRUNPSTD ;SUPIY',
         image: null,
-        hint: null
+        hint: 'Encrypt using a commonly used input device'
     },
     {
         stage: '129',
@@ -43,21 +43,21 @@ const questions = [
     },
     {
         stage: '1139',
-        question: 'The Tree of perseverance',
+        question: 'The "Tree" of perseverance',
         image: null,
-        hint: null
+        hint: 'Inspect the image carefully'
     },
     {
         stage: '1349',
         question: '',
         image: 'https://i.ibb.co/WG7DMRq/Stage1349.png',
-        hint: 'Dah dit'
+        hint: '.-'
     },
     {
         stage: '1679',
         question: 'ZIOL DTLLQUT OL DQRT OFZTFZOGFQSSN SGFU. OZ LIGVL IGV TFEGROFU DTLLQUTL OF ZIT TFUSOLI SQFUXQUT DTQFL ZIQZ LGDT STZZTKL QKT KTHTQZTR DXEI DGKT GYZTF EGDHQKTR ZG GZITKL. FG, ZIOL OL FGZ Q EKQHHN QZZTDHZ ZG KTDGCT QFN HQKZOEXSQK STZZTK YKGD ZIOL SOLZ, OZ\'L QF QWLGSXZTSN FGKDQS KQFRGD HQKQUKQHI. QF OFZTKTLZOFU ZKOCOQ YGK NGX OL ZIQZ ZIT STZZTKL GY ZIT QSHIQWTZ OF GKRTK EGKKTLHGFR ZG JVTKZN YKGD STYZ ZG KOUIZ, ZGH ZG WGZZGD. LG DXEI YGK ZIT HQKQUKQHI, ZIT QFLVTK NGX\'SS FTTR ZG TFZTK OL "DORRST"',
         image: null,
-        hint: null
+        hint: 'Decode using "substitution"'
     },
     {
         stage: '2291',
@@ -71,36 +71,36 @@ const questions = [
         image: null,
         hint: '106 by 17'
     },
+    // {   // remove
+    //     stage: '?',
+    //     question: 'Hope you’ve been paying attention! What is this round’s number?',
+    //     image: null,
+    //     hint: 'Prev rounds were 82, 129, 235, 371, 649, 793, 1139, 1349, 1679, 2291, 2573'
+    // },
     {
-        stage: '?',
-        question: 'Hope you’ve been paying attention! What is this round’s number?',
-        image: null,
-        hint: 'Prev rounds were 82, 129, 235, 371, 649, 793, 1139, 1349, 1679, 2291, 2573'
-    },
-    {
-        stage: '14',
+        stage: '13',
         question: 'The answer after decryption of the code below is a google meet link, but only the random chars without the hyphens - participants must go to the meet link to figure out more.',
         image: 'https://i.ibb.co/QFxT3CJ/Stage14.png',
         hint: 'Read from left to right, top to bottom'
     },
+    // {   // remove
+    //     stage: '15',
+    //     question: '',
+    //     image: null,
+    //     hint: null
+    // },
     {
-        stage: '15',
-        question: '',
-        image: null,
-        hint: null
-    },
-    {
-        stage: '16',
+        stage: '14',
         question: 'epp 60 lru  ?',
         image: null,
         hint: 'j → k, n → m'
     },
-    {
-        stage: '17',
-        question: 'Decode the information hidden in this chessboard which is the name of something. Where was this something formed?',
-        image: 'https://i.ibb.co/6wgHvS4/Stage17.png',
-        hint: 'Morse Code'
-    }
+    // {
+    //     stage: '17',
+    //     question: 'Decode the information hidden in this chessboard which is the name of something. Where was this something formed?',
+    //     image: 'https://i.ibb.co/6wgHvS4/Stage17.png',
+    //     hint: 'Morse Code'
+    // }
 ]
 
 module.exports = {questions : questions};
