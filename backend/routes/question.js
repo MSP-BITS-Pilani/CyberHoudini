@@ -28,7 +28,7 @@ var returnRouter = function (io) {
         const question = await Question.findOne({ stage: stage });
         const questionIndex = { questionIndex: level + 1 };
 
-        io.sockets.join(teamID.toString());
+        // io.sockets.join(teamID.toString());
 
         if (!question) {
             // if (level >= 15) {
@@ -69,7 +69,7 @@ var returnRouter = function (io) {
                 team.level = level + 1;
                 team.lastCorrectAnswer = Date();
                 await team.save();
-                io.sockets.to(teamID.toString()).emit("levelChange", "aage badho chalo");
+                // io.sockets.to(teamID.toString()).emit("levelChange", "aage badho chalo");
                 console.log("Your answer is correct, Score updated successfully");
                 res.status(200).send({ team, members, status });
             } catch (error) {
