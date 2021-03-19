@@ -187,7 +187,7 @@ class Team extends Component {
                  open={this.state.tooltipOpen}
                  target="#beginbutton"
                  toggle={this.tooltipToggle}
-                >{ this.state.dated < new Date("2021-03-19, 14:30:00") ? 'Event starts at 2:30pm 20th March' : 'Start the adventure' }</Tooltip>
+                >{ this.state.dated < new Date("2021-03-20, 14:30:00") ? 'Event starts at 2:30pm 20th March' : 'Start the adventure' }</Tooltip>
               </Link>
             </div>
           </div>
