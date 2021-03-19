@@ -1,0 +1,38 @@
+.register-header {
+  background-color: #203a61 !important;
+}
+
+.register-title {
+  color: white !important;
+  font-size: 2rem;
+}
+
+.register-body {
+  height: 175px !important;
+}
+
+.register-weather {
+  color: #5c2d91 !important;
+  font-size: 3.5rem;
+  line-height: 3.5rem;
+}
+
+.register-picture {
+  border-radius: 50%;
+  margin-bottom: 30px;
+}
+
+.register-profile {
+  background-color: #203a61;
+  border-radius: 20px;
+  padding-top: 20px;
+}
+
+.register-profile-text {
+  color: white;
+}
+
+.register-team-name {
+  color: #5c2d91;
+  font-weight: 400 !important;
+}

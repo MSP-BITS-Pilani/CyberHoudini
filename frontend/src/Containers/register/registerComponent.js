@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './register.css';
-import { Button } from 'shards-react';
+import { Button, Card, CardBody, CardHeader } from 'shards-react';
 import { withRouter } from 'react-router-dom';
 import LoginModal from './loginModalComponent';
 import JoinModal from './joinModalComponent';
@@ -41,20 +41,23 @@ class Register extends Component {
     if(this.props.loggedIn && (this.props.userData.team !== null)) {
       return(
         <div className = "container">
-          <div className = "row mt-3">
-            <div className = "col-3">
-              <img referrerPolicy = "no-referrer" src = {this.props.userData.user.picture} alt = "profile" />
-            </div>
-            <div className = "col-9">
-              <h3>Welcome {this.props.userData.user.name}</h3>
-              <h5>{this.props.userData.user.email}</h5>
-            </div>
-          </div>
-          <div className = "row">
+          <div className = "row home-row align-items-center mt-3">
             <div className = "col-12">
-              <p>You are part of the team {this.props.userData.team.teamName}. Visit the team page at 12 noon 20th March to access
-              the competition link.</p>
-              <Link to = {"/team"}>Visit team page</Link> 
+              <div className = "row justify-content-center">
+                <div className = "col-12">
+                  <h1 className = "register-weather mb-3 mb-md-5">Welcome aboard.</h1>
+                </div>
+                <div className = "col-11 col-md-6 col-lg-4 text-center register-profile">
+                  <img className = "register-picture" referrerPolicy = "no-referrer" src = {this.props.userData.user.picture} alt = "profile" />
+                  <h5 className = "register-profile-text">{this.props.userData.user.name}</h5>
+                  <p className = "register-profile-text">{this.props.userData.user.email}</p>
+                </div>
+                <div className = "col-12 col-md-6 col-lg-8 text-center text-md-left mt-3 mt-md-0">
+                  <p>You are part of the team <span className = "register-team-name">{this.props.userData.team.teamName}</span>. Visit the team page at 12 noon 20th March to access
+                  the competition link.</p>
+                  <Link to = {"/team"}>Visit team page</Link> 
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -66,26 +69,38 @@ class Register extends Component {
         <div>
           <div className = "container">
             <br/>
-            <div className = "row">
-              <div className = "col-6">
-                <h4>Create your own team</h4>
-                <br/>
-                {
-                  document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
-                  <Button onClick = {this.toggleLoginModal} >Create</Button>
-                  :
-                  <Button onClick = {this.toggleCreateModal} >Create</Button>
-                }
+            <div className = "row home-row align-items-center text-center">
+              <div className = "col-12 col-md-6">
+                <Card className = "register-card">
+                  <CardHeader className = "register-header">
+                    <h4 className = "register-title">Create</h4>
+                  </CardHeader>
+                  <CardBody className = "register-body">
+                    <p>Make your own team and take charge. Be the admin and lead your people to glory.</p>
+                    {
+                      document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
+                      <Button className = "home-register" onClick = {this.toggleLoginModal} >Create</Button>
+                      :
+                      <Button className = "home-register" onClick = {this.toggleCreateModal} >Create</Button>
+                    }
+                  </CardBody>
+                </Card>
               </div>
-              <div className = "col-6">
-                <h4>Join an already existing team</h4>
-                <br/>
-                {
-                  document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
-                  <Button onClick = {this.toggleLoginModal} >Join</Button>
-                  :
-                  <Button onClick = {this.toggleJoinModal} >Join</Button>
-                }
+              <div className = "col-12 col-md-6">
+                <Card className = "register-card">
+                  <CardHeader className = "register-header">
+                    <h4 className = "register-title">Join</h4>
+                  </CardHeader>
+                  <CardBody className = "register-body">
+                    <p>Join your friends in their bid to win it all. Ask the admin for team's referral code.</p>
+                    {
+                      document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
+                      <Button className = "home-register" onClick = {this.toggleLoginModal} >Join</Button>
+                      :
+                      <Button className = "home-register" onClick = {this.toggleJoinModal} >Join</Button>
+                    }
+                  </CardBody>
+                </Card>
               </div>
             </div>
           </div>

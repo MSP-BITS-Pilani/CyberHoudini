@@ -196,4 +196,5 @@ teamRouter.delete("/", auth, async (req, res) => {
     }
 });
 
-module.exports = teamRouter
+module.exports = teamRouter;
+

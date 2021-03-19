@@ -9,6 +9,7 @@ import {
 } from "shards-react";
 import { NavLink, withRouter } from 'react-router-dom';
 import {authUrl} from '../../url';
+import './header.css';
 
 
 class Header extends Component {
@@ -36,32 +37,32 @@ class Header extends Component {
   render() {
     console.log(this.props);
     return (
-      <Navbar type="dark" theme="dark" expand="md">
+      <Navbar type="dark" theme="light" expand="md">
         <NavbarBrand href="#">
-          <NavLink to = "/">Cyber Houdini</NavLink>
+          <NavLink to = "/" className = "head-brand">Cyber Houdini</NavLink>
         </NavbarBrand>
-        <NavbarToggler onClick={this.toggleNavbar} />
+        <NavbarToggler className = "head-toggler" onClick={this.toggleNavbar} />
         <Collapse open={this.state.collapseOpen} navbar>
           <Nav navbar className = "ml-auto">
             { document.cookie.split('; ').find(row => row.startsWith('jwt=')) === undefined ?  
-              <NavItem>
-                <a className = "mx-2" href = {authUrl + "&state=" + this.props.location.pathname }>
+              <NavItem className = "mt-4 mb-2 mt-md-0 mb-md-0">
+                <a className = "mx-0 mx-md-3 head-link" href = {authUrl + "&state=" + this.props.location.pathname }>
                   Login
                 </a>
               </NavItem>
               :
-              <NavItem>
-                <span className = "mx-2" onClick= {this.props.logout} >Logout</span>
+              <NavItem className = "mt-4 mb-2 mt-md-0 mb-md-0">
+                <span className = "mx-0 mx-md-3 head-link" onClick= {this.props.logout} >Logout</span>
               </NavItem>
             }
-            <NavItem>
-              <NavLink className = "mx-2" to="/leaderboard" >
+            <NavItem className = "my-2 my-md-0">
+              <NavLink className = "mx-0 mx-md-3 head-link" to="/leaderboard" >
                 Leaderboard
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink className = "mx-2" to="/register" >
-                Register
+            <NavItem className = "my-2 my-md-0">
+              <NavLink className = "mx-0 mx-md-3 head-link" to="/register" >
+                { this.props.loggedIn && (this.props.userData.team !== null) ? 'Dashboard' : 'Register'}
               </NavLink>
             </NavItem>
           </Nav>
