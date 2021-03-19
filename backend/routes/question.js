@@ -26,17 +26,19 @@ var returnRouter = function (io) {
         const team = await Team.findOne({ _id: teamID });
         const level = parseInt(team.level);
         const stage = stageArray[level + 1];
+        console.log(stage);
         const question = await Question.findOne({ stage: stage });
+        console.log(question);
         const questionIndex = { questionIndex: level + 1 };
 
         // io.sockets.join(teamID.toString());
 
         if (!question) {
             // if (level >= 15) {
-            res.status(200).send({ level })
+            // res.status(404).send('No such stage');
             // }
-            // console.error('No such stage');
-            // res.sendStatus(404);
+            console.error('No such stage');
+            res.sendStatus(404);
         }
         else {
             console.log(question);

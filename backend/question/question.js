@@ -95,6 +95,12 @@ const questions = [
         image: null,
         hint: 'j → k, n → m'
     },
+    {
+        stage: '99999999',
+        question: '',
+        image: null,
+        hint: null
+    }
     // {
     //     stage: '17',
     //     question: 'Decode the information hidden in this chessboard which is the name of something. Where was this something formed?',
