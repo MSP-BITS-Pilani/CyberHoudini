@@ -45,7 +45,7 @@ class Register extends Component {
             <div className = "col-12">
               <div className = "row justify-content-center">
                 <div className = "col-12">
-                  <h1 className = "register-weather mb-3 mb-md-5">Welcome aboard.</h1>
+                  <h1 className = "register-weather mb-3 mb-md-5 text-center text-md-left">Welcome aboard.</h1>
                 </div>
                 <div className = "col-11 col-md-6 col-lg-4 text-center register-profile">
                   <img className = "register-picture" referrerPolicy = "no-referrer" src = {this.props.userData.user.picture} alt = "profile" />

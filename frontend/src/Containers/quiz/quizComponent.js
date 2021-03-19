@@ -169,7 +169,7 @@ class Quiz extends Component {
     if (this.state.id === 15) {           /*For a total of 16 stages + mario image*/
       toDisplay =
         <div className="container">
-          <div className="row home-row">
+          <div className="row home-row align-items-center">
             <div className="col-12 text-center">
               {/* <img className = "win-image" src="https://www.coachingforgeeks.com/wp-content/uploads/2018/06/34074321_10161183145705377_7560210874204422144_n.jpg" alt="Princess was in another castle" /> */}
               <h1 className = "register-weather mb-3 mb-md-5">Congratulations</h1>

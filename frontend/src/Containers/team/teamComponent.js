@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import baseUrl from '../../baseUrl';
-import { Card, CardBody, CardTitle, CardHeader, CardImg, Button } from 'shards-react';
+import { Card, CardBody, Button, Tooltip } from 'shards-react';
 import "./team.css";
 import { Link } from 'react-router-dom';
 
@@ -11,8 +10,17 @@ class Team extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamData: {}
+      teamData: {},
+      fetched: false,
+      dated: null,
+      tooltipOpen: false
     }
+  }
+
+  tooltipToggle = () => {
+    this.setState({
+      tooltipOpen: !this.state.tooltipOpen
+    });
   }
 
   deleteTeam = async() => {
@@ -81,7 +89,8 @@ class Team extends Component {
         if(response.status === 200) {
             console.log(response.data);
             this.setState({
-              teamData: response.data
+              teamData: response.data,
+              fetched: true
             });
         }
         else {
@@ -97,6 +106,16 @@ class Team extends Component {
 
   async componentDidMount() {
     if(this.props.loggedIn && (this.props.userData.team !== null)) {
+      this.fetchTeamInfo();
+    }
+    var today = new Date();
+    this.setState({
+      dated: today
+    })
+  }
+
+  async componentDidUpdate() {
+    if(this.props.loggedIn && (this.props.userData.team !== null) && !this.state.fetched) {
       this.fetchTeamInfo();
     }
   }
@@ -151,11 +170,11 @@ class Team extends Component {
               <div/>
             }
           </div>
-          <div className = "row mt-4 justify-content-center">
+          <div className = "row my-4 justify-content-center">
             <div className = "col-8 text-center">
               { this.state.teamData.team !== undefined ? 
                   this.state.teamData.team.adminID === this.props.userData.user._id ? 
-                  <Button className = "home-register" onClick = {this.deleteTeam}>Delete team</Button>
+                  <Button className = "mt-2 home-register" onClick = {this.deleteTeam}>Delete team</Button>
                   :
                   <div/>
                 :
@@ -163,7 +182,12 @@ class Team extends Component {
               }
               &nbsp;
               <Link to = "/houdini">
-                <Button className = "home-register mt-2 mb-4 mb-md-0 mt-md-0 ">Begin the game</Button>
+                <Button id = "beginbutton" className = "mt-2 home-register" disabled = { this.state.dated < new Date("2021-03-19, 14:30:00") }>Begin the game</Button>
+                <Tooltip
+                 open={this.state.tooltipOpen}
+                 target="#beginbutton"
+                 toggle={this.tooltipToggle}
+                >{ this.state.dated < new Date("2021-03-19, 14:30:00") ? 'Event starts at 2:30pm 20th March' : 'Start the adventure' }</Tooltip>
               </Link>
             </div>
           </div>
@@ -172,7 +196,14 @@ class Team extends Component {
     }
     else {
       return(
-        <Redirect to = "/404" />
+        <div className = "container">
+          <div className = "row team-row align-items-center">
+            <div className = "col-12 text-center">
+              <h2 className = "text-logged">The team page could not be found.</h2>
+              <Link to = "/">Home</Link>
+            </div>
+          </div>
+        </div>
       );
     }
   }

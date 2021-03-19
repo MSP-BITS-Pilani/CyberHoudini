@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './leaderboard.css';
-import { Button } from 'shards-react';
-import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import axios from 'axios';
 import baseUrl from '../../baseUrl';
+import './leaderboard.css';
 
 class Leaderboard extends Component {
   
@@ -56,17 +55,32 @@ class Leaderboard extends Component {
   render() {
     return(
       <div className = "container">
-        <ul>
-          { this.state.lisa.map((team) => {
-            return(
-              <li>
-                <h4>{team.teamName}</h4>
-                <h6>{team.level}</h6>
-                <h6>{team.score}</h6>
-              </li>
-            );
-          })}
-        </ul>
+        <div className = "row home-row align-items-center">
+          <div className = "col-12 text-center">  
+            <h3 className = "mb-5 leader-header">Aim for the blue spot. There is only one winner</h3>
+            <table className = "leader-table mt-3">
+              <tr>
+                <th>Position</th>
+                <th className = "text-left">Team name</th>
+                <th className = "text-left">Level cleared</th>
+                <th>Score</th>
+              </tr>
+              {this.state.lisa.map((team,index) => {
+                return(
+                  <tr>
+                    <td className = "text-left ">{index + 1}</td>
+                    <td className = "text-left ">{team.teamName}</td>
+                    <td className = "text-left ">{team.level}</td>
+                    <td>{team.score}</td>
+                  </tr>
+                );
+              })}
+            </table>
+            <p className = "mt-5 leader-header">The leaderboard only shows the top 10 teams leading at any time. In case a team has the same score, one which solved 
+              problems quicker will be placed above
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
