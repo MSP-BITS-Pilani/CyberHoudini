@@ -3,3 +3,13 @@
   width: 100%;
   max-width: 100px;
 }
+
+.team-row {
+  min-height: calc(100vh - 100px) !important;
+}
+
+.text-logged {
+  color: #5c2d91 !important;
+  font-size: 3.5rem;
+  line-height: 3.5rem;
+}

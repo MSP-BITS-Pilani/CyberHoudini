@@ -52,7 +52,7 @@ class Header extends Component {
               </NavItem>
               :
               <NavItem className = "mt-4 mb-2 mt-md-0 mb-md-0">
-                <span className = "mx-0 mx-md-3 head-link" onClick= {this.props.logout} >Logout</span>
+                <span className = "mx-0 mx-md-3 head-link head-logout" onClick= {this.props.logout} >Logout</span>
               </NavItem>
             }
             <NavItem className = "my-2 my-md-0">

@@ -27,3 +27,7 @@
   color: #5c2d91 !important;
   font-size: 1.4rem !important;
 }
+
+.head-logout {
+  cursor: pointer;
+}

@@ -60,7 +60,7 @@ class CreateModal extends Component {
         <ModalBody>
           <Form>
             <FormGroup>
-              <label className = "create-label" htmlFor="#teamname">Enter team name</label>
+              <label className = "create-label" htmlFor="#teamname">Enter team name (Min. 6 characters)</label>
               <FormInput 
                 id="#teamname" 
                 placeholder="Go creative" 
