@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import Quiz from "./quiz/quizComponent";
 import axios from 'axios';
 import baseUrl from '../baseUrl';
+import { io } from 'socket.io-client';
 
 class Main extends Component {
 
