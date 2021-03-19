@@ -4,7 +4,7 @@ const answers = require("../answer");
 const Team = require("../models/team");
 const User = require("../models/user");
 const auth = require('../middleware/auth');
-const stageArray = ["-1", "0", "82", "129", "235", "371", "649", "793", "1139", "1349", "1679", "2291", "2573", "?", "14", "15", "16", "99999999", "-1"];
+const stageArray = ["-1", "0", "82", "129", "235", "371", "649", "793", "1139", "1349", "1679", "2291", "2573", "13", "14", "99999999", "-1"];
 
 // remove this
 // const socketio = require("socket.io");

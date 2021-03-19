@@ -32,7 +32,7 @@ teamRouter.post("/", auth, async (req, res) => {
     }
 
     const teamName = req.query.teamName;
-    if(teamName.length <= 5) {
+    if (teamName.length <= 5) {
         res.status(400).send("Team name is too short. It should be atleast 6 characters");
     }
     else {
@@ -196,4 +196,5 @@ teamRouter.delete("/", auth, async (req, res) => {
     }
 });
 
-module.exports = teamRouter
+module.exports = teamRouter;
+
