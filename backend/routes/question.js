@@ -32,11 +32,11 @@ var returnRouter = function (io) {
         // io.sockets.join(teamID.toString());
 
         if (!question) {
-            if (level >= 15) {
-                res.status(200).send({ level: 15 })
-            }
-            console.error('No such stage');
-            res.sendStatus(404);
+            // if (level >= 15) {
+            res.status(200).send({ level })
+            // }
+            // console.error('No such stage');
+            // res.sendStatus(404);
         }
         else {
             console.log(question);
@@ -70,7 +70,7 @@ var returnRouter = function (io) {
                 team.level = level + 1;
                 team.lastCorrectAnswer = Date();
                 await team.save();
-                io.sockets.to(teamID.toString()).emit("levelChange", "aage badho chalo");
+                // io.sockets.to(teamID.toString()).emit("levelChange", "aage badho chalo");
                 console.log("Your answer is correct, Score updated successfully");
                 res.status(200).send({ team, members, status });
             } catch (error) {
