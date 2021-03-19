@@ -13,19 +13,18 @@ import {
 class Quiz extends Component {
   constructor(props){
   super(props);
-  this.state={
-    QuestionIDs:["-1","0","82","129","235","371","649","793","1139","1349","1679","2291","2573","?","14","15","16","99999999"],
-    id: 1, 
-    question: "Loading...",
-    userAnswer: "",
-    imgURL: "",
-    hint: null,
-    fadeIn: false
+  this.state = {
+      id: 0, 
+      question: "Loading...",
+      userAnswer: "",
+      imgURL: "",
+      hint: null,
+      fadeIn: false
+    }
   }
-}
 
   componentDidMount() {
-    this.getQuestion(this.state.id);
+    this.getQuestion();
     console.log(this.state.QuestionIDs[1])
   }
 
@@ -35,18 +34,21 @@ class Quiz extends Component {
     })
   }
 
-  getQuestion = (id) => {
-    axios({
+  getQuestion = async() => {
+    const cookies = document.cookie.split('; ');
+    const value = cookies.find(item => item.startsWith('jwt')).split('=')[1];
+    await axios({
       method: 'get',
       url: baseUrl + '/questions',
-      Body: {
-        questionID: this.state.QuestionIDs[id]
+      headers: {
+        Authorization: `Bearer ${value}`
       }
     }).then( response => {
       this.setState({
         question: response.data.question,
         imgURL: response.data.image,
-        hint: response.data.hint
+        hint: response.data.hint,
+        id: response.data.questionIndex
       })
     }).catch( error => {
       console.log(error);
@@ -60,15 +62,14 @@ class Quiz extends Component {
   }
 
   handleAnswerSubmit = (event) => {
+    event.preventDefault();
     const post = {
-      userAnswer: this.state.userAnswer.toLowerCase().trim(),
-      questionIndex: this.state.id,
-      questionID: this.state.QuestionIDs[this.state.id]
+      userAnswer: this.state.userAnswer.toLowerCase().trim()
     };
     axios({
       url: baseUrl + '/submitAnswer',
       method: 'post',
-      data: post
+      body: post
     }).then(response => {
        if(response.data === false){
          alert("Wrong answer, try again");
@@ -82,13 +83,9 @@ class Quiz extends Component {
 
           return updatedState;
           
-        }, () => {
-            this.getQuestion(this.state.id);
         });
       }
     })
-
-    event.preventDefault();
   }
 
   render(){

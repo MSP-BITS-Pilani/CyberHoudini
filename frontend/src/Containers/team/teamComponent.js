@@ -118,7 +118,7 @@ class Team extends Component {
                   <div className = "row">
                     { this.state.teamData.members.map((player) => {
                       return(
-                        <div className = "col-12 col-md-4 col-lg-3">
+                        <div className = "col-12 col-md-4 col-lg-3 mt-2 mt-md-0">
                           <Card _id = {player._id}>
                             <CardBody>
                               <div className = "row align-items-center">
@@ -158,7 +158,7 @@ class Team extends Component {
                   <Button className = "home-register" onClick = {this.deleteTeam}>Delete team</Button>
                   &nbsp;
                   <Link to = "/houdini">
-                    <Button className = "home-register">Begin the game</Button>
+                    <Button className = "home-register mt-2 mb-4 mb-md-0 mt-md-0 ">Begin the game</Button>
                   </Link>
                 </div>
                 :
