@@ -28,7 +28,13 @@ var returnRouter = function (io) {
         const stage = stageArray[level + 1];
         const question = await Question.findOne({ stage: stage });
         const questionIndex = { questionIndex: level + 1 };
+
+        io.sockets.join(teamID.toString());
+
         if (!question) {
+            if (level >= 15) {
+                res.status(200).send({ level: 15 })
+            }
             console.error('No such stage');
             res.sendStatus(404);
         }
@@ -53,7 +59,7 @@ var returnRouter = function (io) {
         if (response.toString() === answers.answers[level]) {
             // io.on("connection", async (socket) => {
             //     console.log('Connection established!')
-            const topTeams = await Team.find({}).sort("-score").limit(10);
+            const topTeams = await Team.find({}).sort([["score", -1], ["lastCorrectAnswer", 1]]).limit(10);
             //     socket.emit("updateLeaderBoard", topTeams)
             // })
 
@@ -64,6 +70,7 @@ var returnRouter = function (io) {
                 team.level = level + 1;
                 team.lastCorrectAnswer = Date();
                 await team.save();
+                io.sockets.to(teamID.toString()).emit("levelChange", "aage badho chalo");
                 console.log("Your answer is correct, Score updated successfully");
                 res.status(200).send({ team, members, status });
             } catch (error) {
@@ -75,6 +82,14 @@ var returnRouter = function (io) {
         }
     });
 
+    questionRouter.get("/leaderboard", async (req, res) => {
+        try {
+            const topTeams = await Team.find({}).sort([["score", -1], ["lastCorrectAnswer", 1]]).limit(10);
+            res.send(topTeams);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    })
     return questionRouter;
 }
 
