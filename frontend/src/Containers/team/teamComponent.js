@@ -4,6 +4,7 @@ import axios from 'axios';
 import baseUrl from '../../baseUrl';
 import { Card, CardBody, CardTitle, CardHeader, CardImg, Button } from 'shards-react';
 import "./team.css";
+import { Link } from 'react-router-dom';
 
 class Team extends Component {
   
@@ -103,7 +104,7 @@ class Team extends Component {
   render(){
     if(this.props.loggedIn && (this.props.userData.team !== null)) {
       return(
-        <div className = "container mt-3">
+        <div className = "container mt-4">
           <div className = "row">
              { this.state.teamData.team !== undefined ? 
                 <div className = "col-12">
@@ -150,17 +151,21 @@ class Team extends Component {
               <div/>
             }
           </div>
-          <div className = "row mt-3 justify-content-center">
-            <div className = "col-8 text-center">
-              { this.state.teamData.team !== undefined ? 
-                  this.state.teamData.team.adminID === this.props.userData.user._id ? 
+          <div className = "row mt-4 justify-content-center">
+            { this.state.teamData.team !== undefined ? 
+                this.state.teamData.team.adminID === this.props.userData.user._id ? 
+                <div className = "col-8 text-center">
                   <Button className = "home-register" onClick = {this.deleteTeam}>Delete team</Button>
-                  :
-                  <div/>
+                  &nbsp;
+                  <Link to = "/houdini">
+                    <Button className = "home-register">Begin the game</Button>
+                  </Link>
+                </div>
                 :
                 <div/>
-              }
-            </div>
+              :
+              <div/>
+            }
           </div>
         </div>
       );

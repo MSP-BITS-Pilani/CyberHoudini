@@ -63,6 +63,7 @@ class Main extends Component {
             <Team userData = {this.props.userData} loggedIn = {this.props.loginHandle} />
           </Route>
           <Route path = "/404" component = {NotFound} />
+          <Route path = "/houdini" component = {Quiz} />
           <Redirect to = "/404" />
         </Switch>
       </div>
