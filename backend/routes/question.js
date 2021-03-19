@@ -8,7 +8,6 @@ const auth = require('../middleware/auth');
 
 questionRouter.get("/", auth, async(req, res) => {
     const stage = req.body.questionID;
-    // console.log(stage);
     const question = await Question.findOne({ stage: stage });
     if(!question) {
         console.error('No such stage');
@@ -38,6 +37,7 @@ questionRouter.post("/", auth, async(req, res) => {
         try {
             team.score = team.score + points;
             team.level = questionIndex;
+            team.lastCorrectAnswer = Date();
             await team.save();
             console.log("Your answer is correct, Score updated successfully");
             res.status(200).send({team, members, status});

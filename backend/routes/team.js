@@ -32,23 +32,27 @@ teamRouter.post("/", auth, async (req, res) => {
     }
 
     const teamName = req.query.teamName;
-
-    const team = new Team({
-        teamName,
-        adminID: user._id,
-        referralCode: reffCode
-    })
-
-
-    try {
-        await team.save()
-        user.teamID = team._id
-        await user.save()
-        res.status(201).send("Team created sucessfully");
-    } catch (error) {
-        res.status(400).send(error)
+    if(teamName.length <= 5) {
+        res.status(400).send("Team name is too short. It should be atleast 6 characters");
     }
+    else {
 
+        const team = new Team({
+            teamName,
+            adminID: user._id,
+            referralCode: reffCode
+        })
+
+
+        try {
+            await team.save()
+            user.teamID = team._id
+            await user.save()
+            res.status(201).send("Team created sucessfully");
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
 });
 
 teamRouter.post("/register/usingrc", auth, async (req, res) => {
