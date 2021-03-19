@@ -17,15 +17,15 @@ class Quiz extends Component {
       id: 0, 
       question: "Loading...",
       userAnswer: "",
-      imgURL: "",
+      imgURL: null,
       hint: null,
-      fadeIn: false
+      fadeIn: false,
+      encryptArray: ["-1","0","82","129","235","371","649","793","1139","1349","1679","2291","2573","?","14","15","16","99999999"]
     }
   }
 
   componentDidMount() {
     this.getQuestion();
-    console.log(this.state.QuestionIDs[1])
   }
 
   toggleHint = () => {
@@ -44,12 +44,13 @@ class Quiz extends Component {
         Authorization: `Bearer ${value}`
       }
     }).then( response => {
+      console.log(response);
       this.setState({
-        question: response.data.question,
-        imgURL: response.data.image,
-        hint: response.data.hint,
-        id: response.data.questionIndex
-      })
+        question: response.data.question.question,
+        imgURL: response.data.question.image,
+        hint: response.data.question.hint,
+        id: response.data.questionIndex.questionIndex
+      });
     }).catch( error => {
       console.log(error);
     }) 
@@ -63,27 +64,33 @@ class Quiz extends Component {
 
   handleAnswerSubmit = (event) => {
     event.preventDefault();
-    const post = {
-      userAnswer: this.state.userAnswer.toLowerCase().trim()
-    };
+    const cookies = document.cookie.split('; ');
+    const value = cookies.find(item => item.startsWith('jwt')).split('=')[1];
+    console.log(this.state.userAnswer.toLowerCase().trim());
     axios({
-      url: baseUrl + '/submitAnswer',
+      url: baseUrl + '/questions',
       method: 'post',
-      body: post
+      headers: {
+        Authorization: `Bearer ${value}`
+      },
+      data: {
+        userAnswer: this.state.userAnswer.toLowerCase().trim()
+      }
     }).then(response => {
-       if(response.data === false){
+       console.log(response);
+       if(response.data.status.correct === false){
          alert("Wrong answer, try again");
        }else{
+        alert("Right answer.");
         this.setState((prevState, props) => {
           const updatedState = {
-            id: prevState.id + 1,
             userAnswer: "",
-            question: "Loading..."  
+            question: "Loading..."  ,
+            fadeIn: false
           };
-
           return updatedState;
-          
         });
+        this.getQuestion();
       }
     })
   }
@@ -109,12 +116,12 @@ class Quiz extends Component {
 
         <Container style={{margin: "2rem auto"}}> {/*Question Div */}
           <Card>
-          {this.state.imgURL.length > 0 && 
+          {this.state.imgURL !== null && 
             <CardImg top width="100%" src={this.state.imgURL} alt="Card image cap" />}
           {additionalDiv}
         <CardBody>
-          <CardTitle className={additionalClass} tag="h5">Stage number - {this.state.QuestionIDs[this.state.id]}</CardTitle>
-          <CardText>{this.state.question}</CardText>
+          <CardTitle tag="h5">Stage number - {this.state.encryptArray[this.state.id]}</CardTitle>
+          <CardText className={additionalClass}>{this.state.question}</CardText>
           {this.state.hint && 
             <React.Fragment>
             <Button color="primary" outline size="sm" onClick={this.toggleHint}>Show Hint</Button>
@@ -136,30 +143,19 @@ class Quiz extends Component {
         <Form onSubmit={this.handleAnswerSubmit}>
       <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
         <Label className="mr-sm-2" tag="h6">Enter your answer - </Label>
-        <Input type="email" name="answer" value={this.state.value} onChange={this.handleAnswerChange} />
+        <Input type="text" autoComplete = "off" name="answer" value={this.state.userAnswer} onChange={this.handleAnswerChange} />
       </FormGroup>
       <Button color="primary" outline size="sm" type="submit">Submit</Button>
     </Form>
         </Container>
 
         
-           {/*
-          <form onSubmit={this.handleAnswerSubmit}>
-          <label>
-            Enter Answer:
-            <input type="text" value={this.state.value} onChange={this.handleAnswerChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-          
-          */}
-        
       </div>
 
     );
 
     if(this.state.id === 17){           /*For a total of 16 stages + mario image*/
-       toDisplay = <img src={this.state.imgURL} alt="Princess was in another castle" />
+       toDisplay = <img src="https://www.coachingforgeeks.com/wp-content/uploads/2018/06/34074321_10161183145705377_7560210874204422144_n.jpg" alt="Princess was in another castle" />
     }
 
     return (
