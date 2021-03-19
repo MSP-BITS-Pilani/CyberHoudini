@@ -15,7 +15,6 @@ class Quiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      socket: io(),
       id: 0,
       question: "Loading...",
       userAnswer: "",
