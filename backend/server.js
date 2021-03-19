@@ -9,19 +9,26 @@ const cookieParser = require("cookie-parser")
 // to use cors middleware
 const cors = require('cors');
 
+// import socket
+const socketio = require("socket.io");
+const http = require('http')
+
+const app = express()
+
+const server = http.createServer(app)
+const io = socketio(server)
+
 // connect to database
 require("./mongo-connect")
 
 
 const userRouter = require("./routes/user");
 const teamRouter = require('./routes/team');
-const questionRouter = require('./routes/question');
+const questionRouter = require('./routes/question')(io);
 // const addQuestionRouter = require('./question/add-questions');
 const googleLoginRouter = require("./oauth2/googleAuthRouters")
 
 const PORT = 4000;
-
-const app = express();
 
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
@@ -42,6 +49,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
-app.listen(PORT, function () {
+server.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);
 });
