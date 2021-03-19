@@ -32,23 +32,27 @@ teamRouter.post("/", auth, async (req, res) => {
     }
 
     const teamName = req.query.teamName;
-
-    const team = new Team({
-        teamName,
-        adminID: user._id,
-        referralCode: reffCode
-    })
-
-
-    try {
-        await team.save()
-        user.teamID = team._id
-        await user.save()
-        res.status(201).send("Team created sucessfully");
-    } catch (error) {
-        res.status(400).send(error)
+    if (teamName.length <= 5) {
+        res.status(400).send("Team name is too short. It should be atleast 6 characters");
     }
+    else {
 
+        const team = new Team({
+            teamName,
+            adminID: user._id,
+            referralCode: reffCode
+        })
+
+
+        try {
+            await team.save()
+            user.teamID = team._id
+            await user.save()
+            res.status(201).send("Team created sucessfully");
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
 });
 
 teamRouter.post("/register/usingrc", auth, async (req, res) => {
@@ -117,6 +121,58 @@ teamRouter.post("/remove", auth, async (req, res) => {
     }
 });
 
+teamRouter.post("/leave", auth, async (req, res) => {
+    const user = req.user;
+    const teamID = user.teamID;
+    const team = await Team.findOne({ _id: teamID });
+
+    // check if the user is currently in a team or not
+    if (!teamID) {
+        res.status(400).send("You are in no team.")
+    }
+
+    // makes teamID field of the person who wants to leave as null
+    try {
+        user.teamID = null;
+        await user.save();
+    } catch (err) {
+        res.status(400).send(err)
+    }
+
+    // handles cases where the person who wishes to leave is the admin :(
+    if (team.adminID.toString() == user._id.toString()) {
+
+        // tries to find a member other than the person who left
+        const member = await User.findOne({ teamID })
+
+        // if the admin is the only member then this if case is run
+        if (!member) {
+            try {
+                await Team.findByIdAndDelete({ _id: teamID });
+                res.status(200).send("Sucessfully left and deleted the team");
+            } catch (err) {
+                res.status(400).send(err)
+            }
+        }
+
+        // if there are more than one members then this else block is run 
+        else {
+            try {
+                team.adminID = member._id;
+                await team.save();
+                res.status(200).send("Sucessfully left the team")
+
+            } catch (err) {
+                res.status(400).send(err)
+            }
+        }
+    }
+    // run this when the user is not an admin
+    else {
+        res.status(200).send("Sucessfully left the team")
+    }
+})
+
 teamRouter.delete("/", auth, async (req, res) => {
     const user = req.user;
     const teamID = user.teamID;
@@ -140,4 +196,5 @@ teamRouter.delete("/", auth, async (req, res) => {
     }
 });
 
-module.exports = teamRouter
+module.exports = teamRouter;
+
