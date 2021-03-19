@@ -7,13 +7,13 @@ const auth = require('../middleware/auth');
 const stageArray = ["-1", "0", "82", "129", "235", "371", "649", "793", "1139", "1349", "1679", "2291", "2573", "13", "14", "99999999", "-1"];
 
 // remove this
-const socketio = require("socket.io");
-const http = require('http')
+// const socketio = require("socket.io");
+// const http = require('http')
 
-const app = express()
+// const app = express()
 
-const server = http.createServer(app)
-const io = socketio(server)
+// const server = http.createServer(app)
+// const io = socketio(server)
 //
 
 var returnRouter = function (io) {
