@@ -66,7 +66,7 @@ var returnRouter = function (io) {
                 team.level = level + 1;
                 team.lastCorrectAnswer = Date();
                 await team.save();
-                io.sockets.to(team_id.toString()).emit("levelChange", "aage badho chalo");
+                io.sockets.to(teamID.toString()).emit("levelChange", "aage badho chalo");
                 console.log("Your answer is correct, Score updated successfully");
                 res.status(200).send({ team, members, status });
             } catch (error) {
