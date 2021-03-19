@@ -29,7 +29,7 @@ var returnRouter = function (io) {
         const question = await Question.findOne({ stage: stage });
         const questionIndex = { questionIndex: level + 1 };
 
-        io.sockets.join(teamID.toString());
+        // io.sockets.join(teamID.toString());
 
         if (!question) {
             if (level >= 15) {
