@@ -3,6 +3,8 @@ import './leaderboard.css';
 import { Button } from 'shards-react';
 import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import axios from 'axios';
+import baseUrl from '../../baseUrl';
 
 class Leaderboard extends Component {
   
@@ -25,7 +27,30 @@ class Leaderboard extends Component {
         lisa: data
       });
     })
+    try{
+      const response = await axios({
+          url: baseUrl + '/questions/leaderboard',
+          method: 'get'
+          });
+      if(response.status === 200) {
+          console.log(response.data);
+          this.setState({
+            lisa: response.data 
+          });
+      }
+      else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+      }
+    } 
+    catch(error) {
+        alert("User info couldnt be fetched." + error.message);
+    };
+  }
 
+  componentWillUnmount() {
+    this.state.socket.close();
   }
 
   render() {

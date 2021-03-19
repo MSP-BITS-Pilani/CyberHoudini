@@ -152,20 +152,20 @@ class Team extends Component {
             }
           </div>
           <div className = "row mt-4 justify-content-center">
-            { this.state.teamData.team !== undefined ? 
-                this.state.teamData.team.adminID === this.props.userData.user._id ? 
-                <div className = "col-8 text-center">
+            <div className = "col-8 text-center">
+              { this.state.teamData.team !== undefined ? 
+                  this.state.teamData.team.adminID === this.props.userData.user._id ? 
                   <Button className = "home-register" onClick = {this.deleteTeam}>Delete team</Button>
-                  &nbsp;
-                  <Link to = "/houdini">
-                    <Button className = "home-register mt-2 mb-4 mb-md-0 mt-md-0 ">Begin the game</Button>
-                  </Link>
-                </div>
+                  :
+                  <div/>
                 :
                 <div/>
-              :
-              <div/>
-            }
+              }
+              &nbsp;
+              <Link to = "/houdini">
+                <Button className = "home-register mt-2 mb-4 mb-md-0 mt-md-0 ">Begin the game</Button>
+              </Link>
+            </div>
           </div>
         </div>
       );

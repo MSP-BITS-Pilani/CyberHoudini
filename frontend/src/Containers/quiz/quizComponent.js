@@ -15,6 +15,7 @@ class Quiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      socket: undefined,
       id: 0,
       question: "Loading...",
       userAnswer: "",
@@ -27,6 +28,17 @@ class Quiz extends Component {
 
   componentDidMount() {
     this.getQuestion();
+    const socket = io();
+    this.setState({
+      socket: socket
+    })
+    socket.on("levelChange", data => {
+      this.getQuestion();
+    });
+  }
+
+  componentWillUnmount() {
+    this.state.socket.close();
   }
 
   toggleHint = () => {
