@@ -8,13 +8,13 @@ const auth = require('../middleware/auth');
 const stageArray = ["-1", "0", "82", "129", "235", "371", "649", "793", "1139", "1349", "1679", "2291", "2573", "?", "14", "15", "16", "99999999", "-1"];
 
 // remove this
-const socketio = require("socket.io");
-const http = require('http')
+// const socketio = require("socket.io");
+// const http = require('http')
 
-const app = express()
+// const app = express()
 
-const server = http.createServer(app)
-const io = socketio(server)
+// const server = http.createServer(app)
+// const io = socketio(server)
 //
 
 var returnRouter = function (io) {
@@ -49,11 +49,13 @@ var returnRouter = function (io) {
         const members = await User.find({ teamID: teamID });
 
         if (response.toString() === answers.answers[level]) {
-            io.on("connection", (socket) => {
-                console.log('Connection established!')
-                const topTeams = await Team.find({}).sort("-score").limit(10);
-                socket.emit("updateLeaderBoard", topTeams)
-            })
+            // io.on("connection", (socket) => {
+            //     console.log('Connection established!')
+            const topTeams = await Team.find({}).sort("-score").limit(10);
+            //     socket.emit("updateLeaderBoard", topTeams)
+            // })
+
+            io.sockets.emit("updateLeaderBoard", topTeams)
             status.correct = true;
             try {
                 team.score = team.score + points;
