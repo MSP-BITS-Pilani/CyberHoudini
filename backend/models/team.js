@@ -22,12 +22,12 @@ let teamSchema = new Schema({
 
     level: {
         type: Number,
-        default: 1
+        default: 0
     },
 
     lastCorrectAnswer: {
         type: Date,
-        default: undefined
+        default: Date()
     },
 
     referralCode: {
@@ -40,3 +40,7 @@ let teamSchema = new Schema({
 );
 
 module.exports = mongoose.model("Team", teamSchema)
+
+
+// 2021-03-19T04:23:55.000+00:00
+// 2021-03-19T04:27:17.000+00:00
