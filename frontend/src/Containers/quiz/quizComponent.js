@@ -92,7 +92,14 @@ class Quiz extends Component {
           };
           return updatedState;
         });
-        this.getQuestion();
+        if(this.state.id === 14) {
+          this.setState({
+            id: 15
+          });
+        }
+        else {
+          this.getQuestion();
+        }
       }
     })
   }
@@ -157,7 +164,7 @@ class Quiz extends Component {
           <div className="row">
             <div className="col-12 text-center">
               {/* <img className = "win-image" src="https://www.coachingforgeeks.com/wp-content/uploads/2018/06/34074321_10161183145705377_7560210874204422144_n.jpg" alt="Princess was in another castle" /> */}
-              <h2>Congratulations. You are so lonely that you might just deserve a prize for that. See the leaderboard if you won or not.</h2>
+              <h3 className = "mt-4">Congratulations. You are so lonely that you might just deserve a prize for that. See the leaderboard if you won or not.</h3>
               <Link to="/">
                 <Button onClick="home-register">Redirect to home</Button>&nbsp;
             </Link>
