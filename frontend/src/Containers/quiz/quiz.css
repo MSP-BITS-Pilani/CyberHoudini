@@ -6,3 +6,19 @@
     width: 100%;
     max-width: 400px;
 }
+
+.quiz-row {
+min-height: calc(100vh - 100px) !important;
+}
+
+.quiz-register {
+background-color: #203a61 !important;
+color: white !important;
+border-color: #203a61 !important;
+}
+
+.quiz-weather {
+    color: #5c2d91 !important;
+    font-size: 3rem;
+    line-height: 3rem;
+}
