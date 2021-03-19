@@ -16,7 +16,7 @@ class Leaderboard extends Component {
   }
   
   async componentDidMount() {
-    const socket = io();
+    const socket = io("http://cyberhoudini.centralindia.cloudapp.azure.com:4000/");
     this.setState({
       socket: socket
     });
