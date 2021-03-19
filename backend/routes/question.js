@@ -7,13 +7,13 @@ const auth = require('../middleware/auth');
 const stageArray = ["-1", "0", "82", "129", "235", "371", "649", "793", "1139", "1349", "1679", "2291", "2573", "13", "14", "99999999", "-1"];
 
 // remove this
-// const socketio = require("socket.io");
-// const http = require('http')
+const socketio = require("socket.io");
+const http = require('http')
 
-// const app = express()
+const app = express()
 
-// const server = http.createServer(app)
-// const io = socketio(server)
+const server = http.createServer(app)
+const io = socketio(server)
 //
 
 var returnRouter = function (io) {
@@ -27,6 +27,9 @@ var returnRouter = function (io) {
         const stage = stageArray[level + 1];
         const question = await Question.findOne({ stage: stage });
         const questionIndex = { questionIndex: level + 1 };
+
+        io.sockets.join(teamID.toString());
+
         if (!question) {
             console.error('No such stage');
             res.sendStatus(404);
@@ -63,6 +66,7 @@ var returnRouter = function (io) {
                 team.level = level + 1;
                 team.lastCorrectAnswer = Date();
                 await team.save();
+                io.sockets.to(team_id.toString()).emit("levelChange", "aage badho chalo");
                 console.log("Your answer is correct, Score updated successfully");
                 res.status(200).send({ team, members, status });
             } catch (error) {
