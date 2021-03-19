@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './leaderboard.css';
+import { Button } from 'shards-react';
+import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import axios from 'axios';
 import baseUrl from '../../baseUrl';
-import './leaderboard.css';
 
 class Leaderboard extends Component {
   
