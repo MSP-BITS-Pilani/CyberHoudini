@@ -1,5 +1,4 @@
 const express = require("express");
-const questionRouter = express.Router();
 const Question = require("../models/question");
 const answers = require("../answer");
 const Team = require("../models/team");
@@ -19,6 +18,8 @@ const stageArray = ["-1","0","82","129","235","371","649","793","1139","1349","1
 //
 
 var returnRouter = function (io) {
+    const questionRouter = express.Router();
+
     questionRouter.get("/", auth, async (req, res) => {
         const user = req.user;
         const teamID = user.teamID;
@@ -50,13 +51,13 @@ var returnRouter = function (io) {
         const members = await User.find({ teamID: teamID });
 
         if (response.toString() === answers.answers[level]) {
-            // io.on("connection", (socket) => {
-            //     console.log('Connection established!')
-            const topTeams = await Team.find({}).sort("-score").limit(10);
-            //     socket.emit("updateLeaderBoard", topTeams)
-            // })
+            io.on("connection", async (socket) => {
+                console.log('Connection established!');
+                const topTeams = await Team.find({}).sort("-score").limit(10);
+                socket.emit("updateLeaderBoard", topTeams);
+            })
 
-            io.sockets.emit("updateLeaderBoard", topTeams)
+            // io.sockets.emit("updateLeaderBoard", topTeams)
             status.correct = true;
             try {
                 team.score = team.score + points;
@@ -73,6 +74,8 @@ var returnRouter = function (io) {
             res.status(200).send({ team, members, status });
         }
     });
+
+    return questionRouter;
 }
 
 
