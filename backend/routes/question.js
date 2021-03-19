@@ -51,13 +51,13 @@ var returnRouter = function (io) {
         const members = await User.find({ teamID: teamID });
 
         if (response.toString() === answers.answers[level]) {
-            io.on("connection", async (socket) => {
-                console.log('Connection established!');
-                const topTeams = await Team.find({}).sort("-score").limit(10);
-                socket.emit("updateLeaderBoard", topTeams);
-            })
+            // io.on("connection", async (socket) => {
+            //     console.log('Connection established!')
+            const topTeams = await Team.find({}).sort("-score").limit(10);
+            //     socket.emit("updateLeaderBoard", topTeams)
+            // })
 
-            // io.sockets.emit("updateLeaderBoard", topTeams)
+            io.sockets.emit("updateLeaderBoard", topTeams)
             status.correct = true;
             try {
                 team.score = team.score + points;

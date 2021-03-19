@@ -10,7 +10,7 @@ class Leaderboard extends Component {
     super(props);
     this.state = {
       socket: undefined,
-      list: {}
+      lisa: []
     }
   }
   
@@ -22,16 +22,25 @@ class Leaderboard extends Component {
     socket.on("updateLeaderBoard", data => {
       console.log(data);
       this.setState({
-        list: data
+        lisa: data
       });
     })
+
   }
 
   render() {
     return(
       <div className = "container">
         <ul>
-          <li>leaderboard</li>
+          { this.state.lisa.map((team) => {
+            return(
+              <li>
+                <h4>{team.teamName}</h4>
+                <h6>{team.level}</h6>
+                <h6>{team.score}</h6>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );

@@ -117,42 +117,39 @@ class Quiz extends Component {
 
     let toDisplay = (
       <div>
-
         <Container style={{ margin: "2rem auto" }}> {/*Question Div */}
-          <Card>
-            {this.state.imgURL !== null &&
-              <CardImg top width="100%" src={this.state.imgURL} alt="Card image cap" />}
-            {additionalDiv}
-            <CardBody>
-              <CardTitle tag="h5">Stage number - {this.state.id}</CardTitle>
-              <CardText className={additionalClass}>{this.state.question}</CardText>
-              {this.state.hint &&
-                <React.Fragment>
-                  <Button color="primary" outline size="sm" onClick={this.toggleHint}>Show Hint</Button>
+          <div className = "row justify-content-center">
+            <div className = "col-12 col-md-8 col-lg-6">
+              <Card>
+                {this.state.imgURL !== null &&
+                  <CardImg top width="100%" src={this.state.imgURL} alt="Card image cap" />}
+                {additionalDiv}
+                <CardBody>
+                  <CardTitle tag="h5">Stage number - {this.state.id}</CardTitle>
+                  <CardText className={additionalClass}>{this.state.question}</CardText>
+                  {this.state.hint &&
+                    <React.Fragment>
+                      <Button className = "home-register" size="sm" onClick={this.toggleHint}>Show Hint</Button>
 
-                  <Fade in={this.state.fadeIn} className="mt-3">
-                    {this.state.hint}
-                  </Fade>
+                      <Fade in={this.state.fadeIn} className="mt-3">
+                        {this.state.hint}
+                      </Fade>
 
-                </React.Fragment>}
-
-
-
-            </CardBody>
-          </Card>
+                    </React.Fragment>}
+                </CardBody>
+              </Card>
+            </div>
+            <div className = "col-12 col-md-8 col-lg-6 mt-4 mt-lg-0">
+              <Form onSubmit={this.handleAnswerSubmit}>
+                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                  <Label className="mr-sm-2" tag="h6">Enter your answer - </Label>
+                  <Input type="text" autoComplete="off" name="answer" value={this.state.userAnswer} onChange={this.handleAnswerChange} />
+                </FormGroup>
+                <Button className = "home-register mt-md-3" size="sm" type="submit">Submit</Button>
+              </Form>
+            </div>
+          </div>
         </Container>
-
-        <Container>
-          <Form onSubmit={this.handleAnswerSubmit}>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-              <Label className="mr-sm-2" tag="h6">Enter your answer - </Label>
-              <Input type="text" autoComplete="off" name="answer" value={this.state.userAnswer} onChange={this.handleAnswerChange} />
-            </FormGroup>
-            <Button color="primary" outline size="sm" type="submit">Submit</Button>
-          </Form>
-        </Container>
-
-
       </div>
 
     );
@@ -160,13 +157,15 @@ class Quiz extends Component {
     if (this.state.id === 15) {           /*For a total of 16 stages + mario image*/
       toDisplay =
         <div className="container">
-          <div className="row">
+          <div className="row home-row">
             <div className="col-12 text-center">
               {/* <img className = "win-image" src="https://www.coachingforgeeks.com/wp-content/uploads/2018/06/34074321_10161183145705377_7560210874204422144_n.jpg" alt="Princess was in another castle" /> */}
-              <h3 className = "mt-4">Congratulations. You are so lonely that you might just deserve a prize for that. See the leaderboard if you won or not.</h3>
+              <h1 className = "register-weather mb-3 mb-md-5">Congratulations</h1>
+              <h6 className = "mt-4">You are so lonely that you might just deserve a prize for that. See the leaderboard if you won or not.</h6>
+              <br/>
               <Link to="/">
                 <Button onClick="home-register">Redirect to home</Button>&nbsp;
-            </Link>
+              </Link>
               <Link to="/leaderboard">
                 <Button onClick="home-register">See leaderboard</Button>
               </Link>
