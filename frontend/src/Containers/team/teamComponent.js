@@ -182,7 +182,9 @@ class Team extends Component {
               }
               &nbsp;
               <Link to = "/houdini">
-                <Button id = "beginbutton" className = "mt-2 home-register" disabled = { this.state.dated < new Date("2021-03-19, 14:30:00") }>Begin the game</Button>
+                <span id = "beginbutton">
+                  <Button className = "mt-2 home-register" disabled = { this.state.dated < new Date("2021-03-20, 14:30:00") }>Begin the game</Button>
+                </span>
                 <Tooltip
                  open={this.state.tooltipOpen}
                  target="#beginbutton"
