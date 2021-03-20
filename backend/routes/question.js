@@ -26,9 +26,10 @@ var returnRouter = function (io) {
         const team = await Team.findOne({ _id: teamID });
         const level = parseInt(team.level);
         const stage = stageArray[level + 1];
-        console.log(stage);
+  
+	    //console.log(stage);
         const question = await Question.findOne({ stage: stage });
-        console.log(question);
+//        console.log(question);
         const questionIndex = { questionIndex: level + 1 };
 
         io.on('connection', socket => {
@@ -39,7 +40,7 @@ var returnRouter = function (io) {
             // if (level >= 15) {
             // res.status(404).send('No such stage');
             // }
-            console.error('No such stage');
+           // console.error('No such stage');
             res.sendStatus(404);
         }
         else {
@@ -63,7 +64,7 @@ var returnRouter = function (io) {
         if (response.toString() === answers.answers[level]) {
             // io.on("connection", async (socket) => {
             //     console.log('Connection established!')
-            const topTeams = await Team.find({}).sort([["score", -1], ["lastCorrectAnswer", 1]]).limit(10);
+            const topTeams = await Team.find({}).sort([["score", -1], ["lastCorrectAnswer", 1]]);
             //     socket.emit("updateLeaderBoard", topTeams)
             // })
 
@@ -75,7 +76,7 @@ var returnRouter = function (io) {
                 team.lastCorrectAnswer = Date();
                 await team.save();
                 io.to(teamID.toString()).emit("levelChange", "aage badho chalo");
-                console.log("Your answer is correct, Score updated successfully");
+              //  console.log("Your answer is correct, Score updated successfully");
                 res.status(200).send({ team, members, status });
             } catch (error) {
                 res.status(400).send(error)
@@ -88,7 +89,7 @@ var returnRouter = function (io) {
 
     questionRouter.get("/leaderboard", async (req, res) => {
         try {
-            const topTeams = await Team.find({}).sort([["score", -1], ["lastCorrectAnswer", 1]]).limit(10);
+            const topTeams = await Team.find({}).sort([["score", -1], ["lastCorrectAnswer", 1]]);
             res.send(topTeams);
         } catch (err) {
             res.status(400).send(err);

@@ -80,7 +80,7 @@ const questions = [
     {
         stage: '13',
         question: 'The answer after decryption of the code below is a google meet link, but only the random chars without the hyphens - participants must go to the meet link to figure out more.',
-        image: 'https://i.ibb.co/QFxT3CJ/Stage14.png',
+        image: 'https://i.ibb.co/DgcXHdj/s13.png',
         hint: 'Read from left to right, top to bottom'
     },
     // {   // remove

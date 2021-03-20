@@ -58,7 +58,7 @@ class Leaderboard extends Component {
       <div className = "container">
         <div className = "row home-row align-items-center">
           <div className = "col-12 text-center">  
-            <h3 className = "mb-5 leader-header">Aim for the blue spot. There is only one winner</h3>
+            <h4 className = "mb-4 mt-3 leader-header">Aim for the blue spot. There is only one winner</h4>
             <table className = "leader-table mt-3">
               <tr>
                 <th>Position</th>
@@ -77,7 +77,7 @@ class Leaderboard extends Component {
                 );
               })}
             </table>
-            <p className = "mt-5 leader-header">The leaderboard only shows the top 10 teams leading at any time. In case a team has the same score, one which solved 
+            <p className = "mt-5 leader-header">The leaderboard shows the teams leading at any time. In case a team has the same score, one which solved 
               problems quicker will be placed above
             </p>
           </div>
