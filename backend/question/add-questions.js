@@ -1,4 +1,4 @@
-const questions = require('./question');
+const questions = require('./question1');
 const express = require('express');
 const addQuestionRouter = express.Router();
 const Question = require("../models/question");

@@ -5,7 +5,7 @@ const Team = require("../models/team");
 const User = require("../models/user");
 const auth = require('../middleware/auth');
 
-const stageArray = ["-1","0","82","129","235","371","649","793","1139","1349","1679","2291","2573","13","14","99999999","-1"];
+const stageArray = ["-1", "1","4","5","6","7","9","13","14","-1"];
 
 // remove this
 // const socketio = require("socket.io");
@@ -60,7 +60,7 @@ var returnRouter = function (io) {
         const response = req.body.userAnswer;
         const status = { correct: false };
         const members = await User.find({ teamID: teamID });
-
+	console.log(response.toString())
         if (response.toString() === answers.answers[level]) {
             // io.on("connection", async (socket) => {
             //     console.log('Connection established!')

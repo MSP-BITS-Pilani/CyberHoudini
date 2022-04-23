@@ -25,7 +25,7 @@ require("./mongo-connect")
 const userRouter = require("./routes/user");
 const teamRouter = require('./routes/team');
 const questionRouter = require('./routes/question')(io);
-// const addQuestionRouter = require('./question/add-questions');
+const addQuestionRouter = require('./question/add-questions');
 const googleLoginRouter = require("./oauth2/googleAuthRouters")
 
 const PORT = 4000;
@@ -42,7 +42,7 @@ app.use(googleLoginRouter);
 app.use("/users", userRouter);
 app.use("/teams", teamRouter);
 app.use("/questions", questionRouter);
-// app.use("/addquestions", addQuestionRouter);
+app.use("/addquestions", addQuestionRouter);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {

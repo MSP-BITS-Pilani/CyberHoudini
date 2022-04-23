@@ -58,7 +58,6 @@ class Leaderboard extends Component {
       <div className = "container">
         <div className = "row home-row align-items-center">
           <div className = "col-12 text-center">  
-            <h4 className = "mb-4 mt-3 leader-header">Aim for the blue spot. There is only one winner</h4>
             <table className = "leader-table mt-3">
               <tr>
                 <th>Position</th>

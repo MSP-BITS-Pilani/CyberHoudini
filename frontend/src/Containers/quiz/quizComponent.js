@@ -22,7 +22,7 @@ class Quiz extends Component {
       imgURL: null,
       hint: null,
       fadeIn: false,
-      encryptArray: ["-1", "0", "82", "129", "235", "371", "649", "793", "1139", "1349", "1679", "2291", "2573", "13", "14", "99999999","-1" ]
+      encryptArray: ["-1", "1", "4", "5", "6", "7", "9","13", "14", "-1" ]
     }
   }
 
@@ -103,9 +103,9 @@ class Quiz extends Component {
           };
           return updatedState;
         });
-        if(this.state.id === 14) {
+        if(this.state.id === 8) {
           this.setState({
-            id: 15
+            id: 9
           });
         }
         else {
@@ -122,10 +122,7 @@ class Quiz extends Component {
       additionalClass = "questionFour";
     }
 
-    let additionalDiv = null;
-    if (this.state.id === 8) {         // for this question URL has to be embedded in page source
-      additionalDiv = <div style={{ display: 'none' }}>https://mars.nasa.gov/mars2020/spacecraft/rover/</div>
-    }
+    let additionalDiv = null;    
 
     let toDisplay = (
       <div>
@@ -166,7 +163,7 @@ class Quiz extends Component {
 
     );
     //render winning screen
-    if (this.state.id === 15) {           /*For a total of 16 stages + mario image*/
+    if (this.state.id === 9) {           /*For a total of 16 stages + mario image*/
       toDisplay =
         <div className="container">
           <div className="row home-row align-items-center">

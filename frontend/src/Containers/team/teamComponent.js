@@ -181,15 +181,15 @@ class Team extends Component {
                 <div/>
               }
               &nbsp;
-              <Link to = "/houdini">
+             <Link to = "/houdini">
                 <span id = "beginbutton">
-                  <Button className = "mt-2 home-register" disabled = { this.state.dated < new Date("2021-03-20, 14:30:00") }>Begin the game</Button>
+                  <Button className = "mt-2 home-register" disabled = { this.state.dated < new Date("2022-04-09, 15:00:00") }>Begin the game</Button>
                 </span>
                 <Tooltip
                  open={this.state.tooltipOpen}
                  target="#beginbutton"
                  toggle={this.tooltipToggle}
-                >{ this.state.dated < new Date("2021-03-20, 14:30:00") ? 'Event starts at 2:30pm 20th March' : 'Start the adventure' }</Tooltip>
+                >{ this.state.dated < new Date("2022-04-09, 15:00:00") ? 'Event starts at 3:00 PM 9th April' : 'Start the adventure' }</Tooltip>
               </Link>
             </div>
           </div>

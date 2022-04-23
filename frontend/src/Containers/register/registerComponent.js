@@ -53,8 +53,7 @@ class Register extends Component {
                   <p className = "register-profile-text">{this.props.userData.user.email}</p>
                 </div>
                 <div className = "col-12 col-md-6 col-lg-8 text-center text-md-left mt-3 mt-md-0">
-                  <p>You are part of the team <span className = "register-team-name">{this.props.userData.team.teamName}</span>. Visit the team page at 2:30 pm 20th March to access
-                  the competition link.</p>
+                  <p>You are part of the team <span className = "register-team-name">{this.props.userData.team.teamName}</span>. Visit the team page at 3:00 pm 9th April to access the competition link.</p>
                   <Link to = {"/team"}>Visit team page</Link> 
                 </div>
               </div>
